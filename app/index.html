@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="farfromsober">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="styles/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/css/syle.css">
+
+    <script src="vendor/angular.min.js"></script>
+    <script src="vendor/angular-route.min.js"></script>
+    <script src="vendor/angular-route-segment.min.js"></script>
+    <script src="vendor/angular-locale_es-es.js"></script>
+    <script src="scripts/app.js"></script>
+
+    <script src="scripts/controllers/LoginController.js"></script>
+    <script src="scripts/controllers/PerfilBusquedaController.js"></script>
+    <script src="scripts/controllers/PerfilEditarController.js"></script>
+    <script src="scripts/controllers/PerfilEnVentasController.js"></script>
+    <script src="scripts/controllers/PerfilNotificacionesController.js"></script>
+    <script src="scripts/controllers/PerfilVendidosController.js"></script>
+    <script src="scripts/controllers/ProductoController.js"></script>
+    <script src="scripts/controllers/ProductosController.js"></script>
+    <script src="scripts/controllers/RegistroController.js"></script>
+    <script src="scripts/controllers/VenderController.js"></script>
+    <script src="scripts/controllers/SectionController.js"></script>
+    <script src="scripts/directives/navbar.js"></script>
+    <script src="scripts/directives/elementoTablaProductos.js"></script>
+    <script src="scripts/services/APIFarFromSobersProvider.js"></script>
+</head>
+<body>
+
+    <navbar-directive></navbar-directive>
+
+    <section app-view-segment="0" ng-controller="SectionController"></section>
+
+</body>
+</html>

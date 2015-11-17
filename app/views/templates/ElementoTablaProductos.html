@@ -1,0 +1,13 @@
+
+    <div class="col-sm-6 col-md-3" style="width: 300px">
+        <div class="thumbnail" style="box-shadow:1px 1px gray; border-radius: 10px">
+            <img ng-src="" alt="" style="background-color: #255625;width:340px;height:300px">
+            <div class="caption">
+                <h5 class="text-title">{{ model.name }}</h5>
+                <h5>{{ model.price }}€</h5>
+                <div class="text-description">{{ model.description }}</div>
+                <p> <span class="label label-default">{{ model.category.name }} </span> </p>
+                <p> <img ng-src="" style="background-color: #255625; border-radius: 800px" width="50px" height="50px"> {{ model.seller.username }}</p>
+            </div>
+        </div>
+    </div>
