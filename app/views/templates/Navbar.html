@@ -45,10 +45,18 @@
 
             </div>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/login"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#/registro"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
-            </ul>
+            <div ng-hide="iconsLogin">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/login"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="#/registro"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
+                </ul>
+            </div>
+            <div ng-show="iconsProfile">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><img ng-src="" class="img-navbar-profile" width="40px" height="40px"></li>
+                    <li class="li-navbar-profile-text"><span class="text-navbar-name">{{ userName }}</span> <span class="text-navbar-products"> {{ sales }} Productos</span></li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>

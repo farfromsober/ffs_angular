@@ -16,13 +16,25 @@ angular
                 }] }
         });
 
+        $routeSegmentProvider.when( "/findproductos", "productosWithParams");
+
+        $routeSegmentProvider.segment("productosWithParams", {
+            controller: "ProductosController",
+            templateUrl: "views/Productos.html",
+            dependencies: ["category","name","distance"],
+            resolve: {
+                Productos: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
+                    return APIFarFromSobersProvider.getProductoWithParam($routeParams.category, $routeParams.name, $routeParams.distance);
+                }] }
+        });
+
         $routeSegmentProvider.when( "/producto/:id", "producto");
 
         $routeSegmentProvider.segment("producto", {
             controller: "ProductoController",
             templateUrl: "views/Producto.html",
             resolve: {
-                Producto: ["APIFarFromSobersProvider", function(APIFarFromSobersProvider) {
+                Producto: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
                     return APIFarFromSobersProvider.getProductoById($routeParams.id);
                 }] }
         });
@@ -33,7 +45,7 @@ angular
             controller: "PerfilVendidosController",
             templateUrl: "views/PerfilVendidos.html",
             resolve: {
-                Vendidos: ["APIFarFromSobersProvider", function(APIFarFromSobersProvider) {
+                Vendidos: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
                     return APIFarFromSobersProvider.getPerfilVendidosById($routeParams.id);
                 }] }
         });

@@ -49,6 +49,29 @@
     right: 20px;
 }
 
+/* Navbar*/
+
+.img-navbar-profile {
+    background-color: #255625;
+    border-radius: 800px;
+    padding: 15px;
+    margin-top: 5px;
+}
+
+.li-navbar-profile-text {
+    margin-top: 5px;
+}
+
+.text-navbar-name {
+    margin-left: 10px;
+    color: white;
+}
+
+.text-navbar-products {
+    display: block;
+    margin-left: 8px;
+    color: white;
+}
 
 /* Login */
 
