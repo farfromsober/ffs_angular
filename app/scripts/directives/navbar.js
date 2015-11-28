@@ -39,6 +39,8 @@ angular.module("farfromsober").directive("navbarDirective", ["$location", functi
             $scope.hideLoginIcons = function (data) {
                 $scope.hideLoginIconsDirective(data);
 
+                // Navegamos a la lista de productos
+                $location.path("/productos")
             };
 
             $scope.showLoginIcons = function () {
