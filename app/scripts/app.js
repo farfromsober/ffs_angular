@@ -1,5 +1,11 @@
 angular.module("farfromsober", ["ngRoute", "route-segment", "view-segment"]);
 
+angular
+    .config(function ($httpProvider) {
+        // Configuración del envío del token CSRF al backend en cada llamada http.
+        $httpProvider.defaults.xsrfCookieName = "csrftoken";
+        $httpProvider.defaults.xsrfHeaderName = "X-CSRFToken";
+    });
 
 angular
     .module("farfromsober")
