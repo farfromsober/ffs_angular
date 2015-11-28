@@ -20,8 +20,8 @@ angular.module("farfromsober").directive("navbarDirective", ["$location", functi
 
             scope.hideLoginIconsDirective = function (data) {
                 //Ocultamos el boton de Login y mostramos el perfil logueado
-                scope.userName = data[0].username;
-                scope.sales = data[0].sales;
+                //scope.userName = data[0].username;
+                //scope.sales = data[0].sales;
                 scope.iconsLogin = true;
                 scope.iconsProfile = true;
 
