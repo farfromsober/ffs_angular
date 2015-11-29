@@ -31,6 +31,7 @@ angular
         };
 
         service.SetCredentials = function (username, password) {
+            console.log("GUARDAMOS LAS CREDENCIALES DEL USUARIO");
             var authdata = Base64.encode(username + ':' + password);
 
             $rootScope.globals = {
@@ -40,11 +41,13 @@ angular
                 }
             };
 
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+            // Activar CORS
+            //$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
             $cookieStore.put('globals', $rootScope.globals);
         };
 
         service.ClearCredentials = function () {
+            console.log("BORRAMOS LAS CREDENCIALES DEL USUARIO");
             $rootScope.globals = {};
             $cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic ';

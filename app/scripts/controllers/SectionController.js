@@ -4,5 +4,4 @@ angular
 
         // Arrancamos con la página de login
         $routeSegment.startsWith( "login" );
-        $location.path( "/login" );
     }]);

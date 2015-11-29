@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <!-- Ponemos el ng-show para ocultar toda la barra de búsqueda cuando no estamos logueados -->
-            <div ng-show="iconsLogin" class="nav navbar-nav navbar-center">
+            <div ng-show="showNavbarElements" class="nav navbar-nav navbar-center">
                 <form class="navbar-form" role="search" name="form">
                     <a class="glyphicon glyphicon-home" href="#/productos">
                     </a>
@@ -46,13 +46,12 @@
 
             </div>
 
-            <!--<div ng-hide="iconsLogin">
+            <div ng-show="showNavbarElements">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#/login"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="#/registro"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
+                    <li><a ng-click="navbarHideElements()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 </ul>
-            </div>-->
-            <div ng-show="iconsProfile">
+            </div>
+            <div ng-show="showNavbarElements">
                 <ul class="nav navbar-nav navbar-right">
                     <li><img ng-src="" class="img-navbar-profile" width="40px" height="40px"></li>
                     <li class="li-navbar-profile-text"><span class="text-navbar-name">{{ userName }}</span> <span class="text-navbar-products"> {{ sales }} Productos</span></li>
