@@ -5,6 +5,7 @@
 
     <br><br>
 
+    <img ng-src="{{ ::producto.images[0] }}" style="width:100px; height:100px; margin-right: 20px;">
     <img ng-src="{{ ::producto.images[1] }}" style="width:100px; height:100px; margin-right: 20px;">
     <img ng-src="{{ ::producto.images[2] }}" style="width:100px; height:100px; margin-right: 20px;">
     <img ng-src="{{ ::producto.images[3] }}" style="width:100px; height:100px">
@@ -19,6 +20,7 @@
          <h3>{{ ::producto.name }}</h3>
          <p>{{ ::producto.description }}</p>
          <p> <span class="label label-default">{{ ::producto.category.name }} </span> </p>
+         <p>{{ ::producto.published_date|fechaVenta }}</p>
      </div>
 
     <h5>UBICACIÓN</h5>
