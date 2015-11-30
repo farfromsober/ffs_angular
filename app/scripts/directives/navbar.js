@@ -1,4 +1,4 @@
-angular.module("farfromsober").directive("navbarDirective", ["$location", "AuthenticationService", function($location,  AuthenticationService) {
+angular.module("farfromsober").directive("navbarDirective", ["$location", "AuthenticationService", "$window", function($location,  AuthenticationService, $window) {
 
     return {
         templateUrl: "views/templates/Navbar.html",
@@ -19,14 +19,19 @@ angular.module("farfromsober").directive("navbarDirective", ["$location", "Authe
 
             scope.navbarShowElements = function (data) {
                 //Ocultamos el boton de Login y mostramos el perfil logeado
-                scope.userName = scope.globals.currentUser.username;
+                //scope.userName = scope.globals.currentUser.username;
                 //scope.sales = data[0].sales;
+                //scope.user = JSON.parse($window.sessionStorage.user);
+                scope.user = AuthenticationService.GetUser();
+                scope.userName = scope.user.username;
+                scope.sales = scope.user.sales;
                 $location.path("/productos")
                 scope.showNavbarElements=true;
             };
 
             scope.navbarHideElements = function () {
-                AuthenticationService.ClearCredentials();
+                //AuthenticationService.ClearCredentials();
+                AuthenticationService.ClearCredentialsSessionStorage();
                 $location.path("/login")
                 scope.showNavbarElements=false;
             };

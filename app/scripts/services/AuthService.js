@@ -4,8 +4,8 @@ angular
     .module('farfromsober')
 
 .factory('AuthenticationService',
-    ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
-    function (Base64, $http, $cookieStore, $rootScope, $timeout) {
+    ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout', '$window',
+    function (Base64, $http, $cookieStore, $rootScope, $timeout, $window) {
         var service = {};
 
         service.Login = function (username, password, callback) {
@@ -46,7 +46,29 @@ angular
             $cookieStore.put('globals', $rootScope.globals);
         };
 
+        service.SetCredentialsSessionStorage = function (username, password, user) {
+            /*var authdata = Base64.encode(username + ':' + password);
+            var currentUser = {
+                    username: username,
+                    authdata: authdata
+                }
+            $window.sessionStorage.session = currentUser;*/
+            //debugger;
+            $window.sessionStorage.user = JSON.stringify(user);
+        };
+
+        service.ClearCredentialsSessionStorage = function () {
+            //delete sessionStorage.session;
+            //$window.sessionStorage.removeItem(JSON.parse($window.sessionStorage.user));
+            delete $window.sessionStorage.user;
+        };
+
+        service.GetUser = function () {
+            return $window.sessionStorage.user;
+        };
+
         service.ClearCredentials = function () {
+            debugger;
             console.log("BORRAMOS LAS CREDENCIALES DEL USUARIO");
             $rootScope.globals = {};
             $cookieStore.remove('globals');

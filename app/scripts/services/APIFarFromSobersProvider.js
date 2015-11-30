@@ -55,9 +55,19 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         return "";
     };
 
-    this.getLoginUsuario = function( user, pass ) {
+    this.getLoginUsuario = function( username, password, callback) {
         //TODO Debemos añadir el user y la pass en la llamada a la api
-        return $http.get(configService.getURLBase() + "get/NJsNmZgQe");
+        //return $http.get(configService.getURLBase() + "get/NJsNmZgQe");
+        return $http.get(configService.getURLBase() + "get/NJsNmZgQe")
+            .then(function (response) {
+                //debugger;
+                console.log(response);
+                callback(response);
+            }, function (response) {
+                //debugger;
+                console.log(response);
+                callback(response);
+            });
     };
 
     this.postRegistroUsuario = function( usuario ) {

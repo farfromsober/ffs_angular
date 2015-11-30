@@ -131,26 +131,41 @@ angular
 
     }])
 
-    .run(["$rootScope", "$location", "$cookieStore", "$http",
-        function ($rootScope, $location, $cookieStore, $http) {
+    .run(["$rootScope", "$location", "$cookieStore", "$http", "$window", "AuthenticationService",
+        function ($rootScope, $location, $cookieStore, $http, $window, AuthenticationService) {
             // keep user logged in after page refresh
+            debugger;
+            //$rootScope.globals = $cookieStore.get('globals') || {};
+            //$rootScope.showNavbarElements = $rootScope.globals.currentUser;
 
-            $rootScope.globals = $cookieStore.get('globals') || {};
-            $rootScope.showNavbarElements = $rootScope.globals.currentUser;
+            $rootScope.user = $window.sessionStorage.user;
+            //$rootScope.showNavbarElements = $window.sessionStorage.user;
+            $rootScope.showNavbarElements = AuthenticationService.GetUser();
 
-            // Para activar CORS
+                // Para activar CORS
             /*if ($rootScope.globals.currentUser) {
                 console.log("USUARIO YA AUTENTICADO")
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
             }*/
 
-            $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            /*$rootScope.$on('$locationChangeStart', function (event, next, current) {
                 // redirect to login page if not logged in
                 if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
-                    //console.log("USUARIO NO AUTENTICADO, REDIRIGIMOS A /LOGIN");
+                    console.log("USUARIO NO AUTENTICADO, REDIRIGIMOS A /LOGIN");
                     $location.path('/login');
                 } else if ($location.path() == '/login' && $rootScope.globals.currentUser) {
-                    //console.log("USUARIO AUTENTICADO INTENTANDO NAVEGAR A LOGIN, NOS VAMOS A PRODUCTOS");
+                    console.log("USUARIO AUTENTICADO INTENTANDO NAVEGAR A LOGIN, NOS VAMOS A PRODUCTOS");
+                    $location.path('/productos');
+                }
+            });*/
+
+            $rootScope.$on('$locationChangeStart', function (event, next, current) {
+                // redirect to login page if not logged in
+                if ($location.path() !== '/login' && !AuthenticationService.GetUser()) {
+                    console.log("USUARIO NO AUTENTICADO, REDIRIGIMOS A /LOGIN");
+                    $location.path('/login');
+                } else if ($location.path() == '/login' && AuthenticationService.GetUser()) {
+                    console.log("USUARIO AUTENTICADO INTENTANDO NAVEGAR A LOGIN, NOS VAMOS A PRODUCTOS");
                     $location.path('/productos');
                 }
             });
