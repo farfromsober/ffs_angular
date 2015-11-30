@@ -6,7 +6,6 @@ angular.module("farfromsober").directive("navbarDirective", ["$location", "Authe
             userIsLoged: '@'
         },*/
         link: function (scope) {
-            //userLoged = false;
 
             scope.findProducts = function (){
                 var name = scope.form.inputFindProducts.$viewValue;
@@ -19,8 +18,8 @@ angular.module("farfromsober").directive("navbarDirective", ["$location", "Authe
             };
 
             scope.navbarShowElements = function (data) {
-                //Ocultamos el boton de Login y mostramos el perfil logueado
-                //scope.userName = data.username;
+                //Ocultamos el boton de Login y mostramos el perfil logeado
+                scope.userName = scope.globals.currentUser.username;
                 //scope.sales = data[0].sales;
                 $location.path("/productos")
                 scope.showNavbarElements=true;
