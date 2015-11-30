@@ -1,0 +1,40 @@
+<div class="col-md-7"
+     style="padding-left:100px; padding-top:10px;">
+
+    <img ng-src="{{ ::producto.images[0] }}" style="width:100%;">
+
+    <br><br>
+
+    <img ng-src="{{ ::producto.images[1] }}" style="width:100px; height:100px; margin-right: 20px;">
+    <img ng-src="{{ ::producto.images[2] }}" style="width:100px; height:100px; margin-right: 20px;">
+    <img ng-src="{{ ::producto.images[3] }}" style="width:100px; height:100px">
+
+</div>
+
+<div class="col-md-5"
+     style="padding-right:100px; padding-top:10px;">
+
+     <div class="well well-sm">
+         <h4>{{ ::producto.price }}€</h4>
+         <h3>{{ ::producto.name }}</h3>
+         <p>{{ ::producto.description }}</p>
+         <p> <span class="label label-default">{{ ::producto.category.name }} </span> </p>
+     </div>
+
+    <h5>UBICACIÓN</h5>
+    <img ng-src="http://www.inforural.com/ficheros/image/rutas/LasPalmas/Recreandonos%20con%20los%20Parques%20Tematicos/mapa.jpg"
+         style="width:100%">
+
+    <br><br>
+
+    <elemento-usuario model="producto.seller"></elemento-usuario>
+
+    <br>
+
+    <comparte-producto model="producto"></comparte-producto>
+
+
+</div>
+
+
+<a href="#/vender" class="btn btn-circle-lg btn-primary"> <span>Vender</span> </a>
