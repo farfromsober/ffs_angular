@@ -47,24 +47,19 @@ angular
         };
 
         service.SetCredentialsSessionStorage = function (username, password, user) {
-            /*var authdata = Base64.encode(username + ':' + password);
-            var currentUser = {
-                    username: username,
-                    authdata: authdata
-                }
-            $window.sessionStorage.session = currentUser;*/
-            //debugger;
-            $window.sessionStorage.user = JSON.stringify(user);
+            localStorage.setItem('user', JSON.stringify(user));
         };
 
         service.ClearCredentialsSessionStorage = function () {
             //delete sessionStorage.session;
             //$window.sessionStorage.removeItem(JSON.parse($window.sessionStorage.user));
-            delete $window.sessionStorage.user;
+            //delete $window.sessionStorage.user;
+            localStorage.removeItem('user');
         };
 
         service.GetUser = function () {
-            return $window.sessionStorage.user;
+            //return $window.sessionStorage.user;
+            return localStorage.getItem('user');
         };
 
         service.ClearCredentials = function () {

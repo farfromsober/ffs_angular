@@ -1,16 +1,16 @@
 angular
     .module("farfromsober")
-    .controller("SectionController", ["$scope", "$routeSegment", "$location", "AuthenticationService", function($scope,$routeSegment,$location, AuthenticationService){
+    .controller("SectionController", ["$scope", "$routeSegment", "$location", "AuthenticationService", "$window", function($scope,$routeSegment,$location, AuthenticationService, $window){
 
         // Arrancamos con la página de login
         $routeSegment.startsWith( "login" );
-        //$scope.user = AuthenticationService.GetUser();
-        //$scope.mySessionStorage = webStorage.session;
 
-        $scope.$watch(function () {
-            return AuthenticationService.GetUser();
-        }, function (newVal, oldVal) {
-            console.log("User storage: "+newVal);
-            $scope.user = newVal;
-        }, true);
+        /*$scope.savedUser = localStorage.getItem('user');
+        $scope.user = (localStorage.getItem('user')!==null) ? JSON.parse($scope.savedUser) : [ {first_name: 'Not loged'}];
+        localStorage.setItem('user', JSON.stringify($scope.user));
+
+        $scope.savedShowNavBar = localStorage.getItem('showNavBar');
+        $scope.showNavBarElements = (localStorage.getItem('showNavBar')!==null) ? $scope.savedShowNavBar : false;
+        localStorage.setItem('showNavBar', $scope.showNavBarElements);
+        */
     }]);
