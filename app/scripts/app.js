@@ -134,7 +134,7 @@ angular
     .run(["$rootScope", "$location", "$cookieStore", "$http", "$window", "AuthenticationService",
         function ($rootScope, $location, $cookieStore, $http, $window, AuthenticationService) {
             // keep user logged in after page refresh
-            debugger;
+
             //$rootScope.globals = $cookieStore.get('globals') || {};
             //$rootScope.showNavbarElements = $rootScope.globals.currentUser;
 

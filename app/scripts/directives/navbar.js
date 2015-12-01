@@ -21,8 +21,8 @@ angular.module("farfromsober").directive("navbarDirective", ["$location", "Authe
                 //Ocultamos el boton de Login y mostramos el perfil logeado
                 //scope.userName = scope.globals.currentUser.username;
                 //scope.sales = data[0].sales;
-                //scope.user = JSON.parse($window.sessionStorage.user);
-                scope.user = AuthenticationService.GetUser();
+                scope.user = JSON.parse($window.sessionStorage.user);
+                //scope.user = AuthenticationService.GetUser();
                 scope.userName = scope.user.username;
                 scope.sales = scope.user.sales;
                 $location.path("/productos")
