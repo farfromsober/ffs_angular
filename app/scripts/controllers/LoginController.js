@@ -13,7 +13,7 @@ angular
                 } else {
                     debugger;
                     console.log(response);
-                    $scope.error = response.message;
+                    $scope.error = "El nombre de usuario o el password introducidos son incorrectos"//response.message;
                     $scope.dataLoading = false;
                 }
             });
