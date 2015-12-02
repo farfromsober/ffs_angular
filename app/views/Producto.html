@@ -1,14 +1,18 @@
 <div class="col-md-7"
      style="padding-left:100px; padding-top:10px;">
 
-    <img ng-src="{{ ::producto.images[0] }}" style="width:100%;">
+    <img ng-src="{{ selectedImage }}" style="width:100%;">
 
     <br><br>
 
-    <img ng-src="{{ ::producto.images[0] }}" style="width:100px; height:100px; margin-right: 20px;">
-    <img ng-src="{{ ::producto.images[1] }}" style="width:100px; height:100px; margin-right: 20px;">
-    <img ng-src="{{ ::producto.images[2] }}" style="width:100px; height:100px; margin-right: 20px;">
-    <img ng-src="{{ ::producto.images[3] }}" style="width:100px; height:100px">
+    <img ng-src="{{ ::producto.images[0] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
+         ng-click="changeImage(0)">
+    <img ng-src="{{ ::producto.images[1] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
+         ng-click="changeImage(1)">
+    <img ng-src="{{ ::producto.images[2] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
+         ng-click="changeImage(2)">
+    <img ng-src="{{ ::producto.images[3] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
+         ng-click="changeImage(3)">
 
 </div>
 
@@ -20,7 +24,7 @@
          <h3>{{ ::producto.name }}</h3>
          <p>{{ ::producto.description }}</p>
          <p> <span class="label label-default">{{ ::producto.category.name }} </span> </p>
-         <p>{{ ::producto.published_date|fechaVenta }}</p>
+         <p>{{ ::producto.published_date|date:'dd/MM/yyyy  HH:mm'|fechaVenta }}</p>
      </div>
 
     <h5>UBICACIÓN</h5>

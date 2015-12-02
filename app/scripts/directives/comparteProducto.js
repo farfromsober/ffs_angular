@@ -1,6 +1,6 @@
 angular
     .module("farfromsober")
-    .directive("comparteProducto", function(){
+    .directive("comparteProducto", ["configService", function(configService){
 
         return {
             restrict: "AE",
@@ -10,8 +10,9 @@ angular
                 model: "="
             },
             link: function(scope){
-
+                scope.facebookImageURL = configService.facebookImageURL;
+                scope.twitterImageURL = configService.twitterImageURL;
             }
         };
 
-    });
+    }]);
