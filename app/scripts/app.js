@@ -117,6 +117,14 @@ angular
             resolve: {}
         });
 
+        $routeSegmentProvider.when( "/password", "password");
+
+        $routeSegmentProvider.segment("password", {
+            controller: "PasswordController",
+            templateUrl: "views/Password.html",
+            resolve: {}
+        });
+
         $routeSegmentProvider.when( "/vender", "vender");
 
         $routeSegmentProvider.segment("vender", {
@@ -142,13 +150,18 @@ angular
             }*/
 
             $rootScope.$on('$locationChangeStart', function (event, next, current) {
-                // redirect to login page if not logged in
-                if ($location.path() !== '/login' && !AuthService.GetUser()) {
-                    //console.log("USUARIO NO AUTENTICADO, REDIRIGIMOS A /LOGIN");
-                    $location.path('/login');
-                } else if ($location.path() == '/login' && AuthService.GetUser()) {
-                    //console.log("USUARIO AUTENTICADO INTENTANDO NAVEGAR A LOGIN, NOS VAMOS A PRODUCTOS");
-                    $location.path('/productos');
+
+                console.log("path: "+$location.path());
+                if (!AuthService.GetUser()) {
+                    if ($location.path() != '/login' && $location.path() != '/registro' && $location.path() != '/password') {
+                        console.log("USUARIO NO AUTENTICADO, REDIRIGIMOS A /LOGIN");
+                        $location.path('/login');
+                    }
+                } else {
+                    if ($location.path() == '/login' || $location.path() == '/registro' || $location.path() == '/password') {
+                        console.log("USUARIO AUTENTICADO INTENTANDO NAVEGAR A LOGIN, PASSWORD O REGISTRO. REDIRIGIMOS A /PRODUCTOS");
+                        $location.path('/productos');
+                    }
                 }
             });
         }]);
