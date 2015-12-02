@@ -3,7 +3,7 @@
 angular
     .module('farfromsober')
 
-.factory('AuthenticationService',
+.factory('AuthService',
     ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout', '$window',
     function (Base64, $http, $cookieStore, $rootScope, $timeout, $window) {
         var service = {};
@@ -30,44 +30,20 @@ angular
 
         };
 
-        service.SetCredentials = function (username, password) {
-            console.log("GUARDAMOS LAS CREDENCIALES DEL USUARIO");
-            var authdata = Base64.encode(username + ':' + password);
-
-            $rootScope.globals = {
-                currentUser: {
-                    username: username,
-                    authdata: authdata
-                }
-            };
-
-            // Activar CORS
-            //$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-            $cookieStore.put('globals', $rootScope.globals);
-        };
-
-        service.SetCredentialsSessionStorage = function (username, password, user) {
-            localStorage.setItem('user', JSON.stringify(user));
-        };
-
-        service.ClearCredentialsSessionStorage = function () {
-            //delete sessionStorage.session;
-            //$window.sessionStorage.removeItem(JSON.parse($window.sessionStorage.user));
-            //delete $window.sessionStorage.user;
-            localStorage.removeItem('user');
-        };
-
-        service.GetUser = function () {
-            //return $window.sessionStorage.user;
-            return localStorage.getItem('user');
+        service.SetCredentials = function (username, password, user) {
+            $window.sessionStorage.user = JSON.stringify(user);
+            $window.sessionStorage.showNavBar = true;
         };
 
         service.ClearCredentials = function () {
-            debugger;
-            console.log("BORRAMOS LAS CREDENCIALES DEL USUARIO");
-            $rootScope.globals = {};
-            $cookieStore.remove('globals');
-            $http.defaults.headers.common.Authorization = 'Basic ';
+            delete $window.sessionStorage.user;
+            $rootScope.user = {};
+            $rootScope.user = null;
+            $window.sessionStorage.showNavBar = false;
+        };
+
+        service.GetUser = function () {
+            return $window.sessionStorage.user;
         };
 
         return service;

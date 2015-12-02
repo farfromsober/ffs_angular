@@ -61,11 +61,11 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         return $http.get(configService.getURLBase() + "get/NJsNmZgQe")
             .then(function (response) {
                 //debugger;
-                console.log(response);
+                //console.log(response);
                 callback(response);
             }, function (response) {
                 //debugger;
-                console.log(response);
+                //console.log(response);
                 callback(response);
             });
     };

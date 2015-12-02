@@ -131,8 +131,8 @@ angular
 
     }])
 
-    .run(["$rootScope", "$location", "$cookieStore", "$http", "$window", "AuthenticationService",
-        function ($rootScope, $location, $cookieStore, $http, $window, AuthenticationService) {
+    .run(["$rootScope", "$location", "$cookieStore", "$http", "$window", "AuthService",
+        function ($rootScope, $location, $cookieStore, $http, $window, AuthService) {
             // keep user logged in after page refresh
 
                 // Para activar CORS
@@ -143,11 +143,11 @@ angular
 
             $rootScope.$on('$locationChangeStart', function (event, next, current) {
                 // redirect to login page if not logged in
-                if ($location.path() !== '/login' && !AuthenticationService.GetUser()) {
-                    console.log("USUARIO NO AUTENTICADO, REDIRIGIMOS A /LOGIN");
+                if ($location.path() !== '/login' && !AuthService.GetUser()) {
+                    //console.log("USUARIO NO AUTENTICADO, REDIRIGIMOS A /LOGIN");
                     $location.path('/login');
-                } else if ($location.path() == '/login' && AuthenticationService.GetUser()) {
-                    console.log("USUARIO AUTENTICADO INTENTANDO NAVEGAR A LOGIN, NOS VAMOS A PRODUCTOS");
+                } else if ($location.path() == '/login' && AuthService.GetUser()) {
+                    //console.log("USUARIO AUTENTICADO INTENTANDO NAVEGAR A LOGIN, NOS VAMOS A PRODUCTOS");
                     $location.path('/productos');
                 }
             });
