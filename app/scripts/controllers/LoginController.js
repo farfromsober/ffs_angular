@@ -8,7 +8,7 @@ angular
             APIFarFromSobersProvider.getLoginUsuario($scope.username,$scope.password, function (response) {
                 if (response.status == 200) {
                     //debugger;
-                    AuthService.SetCredentials($scope.username, $scope.password, response.data[0]);
+                    AuthService.SetCredentials($scope.username, $scope.password, response.data);
                     $scope.navbarShowElements();
                 } else {
                     debugger;
