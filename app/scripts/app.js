@@ -143,23 +143,23 @@ angular
         function ($rootScope, $location, $cookieStore, $http, $window, AuthService) {
             // keep user logged in after page refresh
 
-                // Para activar CORS
-            /*if ($rootScope.globals.currentUser) {
-                console.log("USUARIO YA AUTENTICADO")
-                $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-            }*/
-
             $rootScope.$on('$locationChangeStart', function (event, next, current) {
 
-                console.log("path: "+$location.path());
                 if (!AuthService.GetUser()) {
+                    $rootScope.user = {};
+                    $rootScope.user = null;
+                    $rootScope.showNavbarElements=false;
                     if ($location.path() != '/login' && $location.path() != '/registro' && $location.path() != '/password') {
-                        console.log("USUARIO NO AUTENTICADO, REDIRIGIMOS A /LOGIN");
+                        //console.log("USUARIO NO AUTENTICADO, REDIRIGIMOS A /LOGIN");
                         $location.path('/login');
                     }
                 } else {
+                    //console.log("Usuario ya logueado!!!!");
+                    $rootScope.user = JSON.parse(AuthService.GetUser());
+                    $rootScope.showNavbarElements=$window.sessionStorage.showNavBar;
+                    $http.defaults.headers.common['Authorization'] = 'Basic ' + $window.sessionStorage.authdata;
                     if ($location.path() == '/login' || $location.path() == '/registro' || $location.path() == '/password') {
-                        console.log("USUARIO AUTENTICADO INTENTANDO NAVEGAR A LOGIN, PASSWORD O REGISTRO. REDIRIGIMOS A /PRODUCTOS");
+                        //console.log("USUARIO AUTENTICADO INTENTANDO NAVEGAR A LOGIN, PASSWORD O REGISTRO. REDIRIGIMOS A /PRODUCTOS");
                         $location.path('/productos');
                     }
                 }

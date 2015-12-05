@@ -31,12 +31,17 @@ angular
         };
 
         service.SetCredentials = function (username, password, user) {
+            var authdata = Base64.encode(username + ':' + password);
+            $window.sessionStorage.authdata = authdata;
             $window.sessionStorage.user = JSON.stringify(user);
             $window.sessionStorage.showNavBar = true;
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
         };
 
         service.ClearCredentials = function () {
+            //console.log("CLEAR CREDENTIALS");
             delete $window.sessionStorage.user;
+            delete $window.sessionStorage.authdata;
             $rootScope.user = {};
             $rootScope.user = null;
             $window.sessionStorage.showNavBar = false;

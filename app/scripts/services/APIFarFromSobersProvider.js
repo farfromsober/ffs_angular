@@ -1,12 +1,16 @@
-angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$filter","$q","configService", function($http,$filter,$q,configService) {
+angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$filter","$q","configService", "$rootScope", function($http,$filter,$q,configService, $rootScope) {
 
     this.getProductos = function() {
-
         //Utilizamos la caché para obtener los datos ahorrandonos la llamada a la API
         var config = {
-            cache: true
+            cache: true//,
         }
-        return $http.get(configService.getURLBase() + "get/NyJpZWxQl", config);
+        return $http.get(configService.getURLBase() + "products/", config)
+            .then(function (response) {
+                return response;
+            }, function (response) {
+                return response;
+            });
     };
 
     this.getProductoWithParam = function( category, name, distance ) {
@@ -16,7 +20,7 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
             cache: true
         }
         //Crear la url con los parametros que nos llegan
-        return $http.get(configService.getURLBase() + "get/NyJpZWxQl", config);
+        return $http.get(configService.getFakeURLBase() + "get/NyJpZWxQl", config)
     };
 
     this.getProductoById = function( id ) {
@@ -28,7 +32,7 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         }
 
         var promise = $q.defer();
-        $http.get(configService.getURLBase() + "get/NyJpZWxQl", config).then(function (data) {
+        $http.get(configService.getFakeURLBase() + "get/NyJpZWxQl", config).then(function (data) {
             var producto = $filter("filter")(data.data, {"_id": id})[0];
             promise.resolve(producto);
         });
@@ -55,17 +59,15 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         return "";
     };
 
-    this.getLoginUsuario = function( username, password, callback) {
-        //TODO Debemos añadir el user y la pass en la llamada a la api
-        //return $http.get(configService.getURLBase() + "get/NJsNmZgQe");
-        return $http.get(configService.getURLBase() + "get/NJsNmZgQe")
+    this.getLoginUsuario = function(username, password, callback) {
+        var userObject = {
+            user : username,
+            password : password
+        };
+        return $http.post(configService.getURLBase() + "login/", userObject)
             .then(function (response) {
-                //debugger;
-                //console.log(response);
                 callback(response);
             }, function (response) {
-                //debugger;
-                //console.log(response);
                 callback(response);
             });
     };
@@ -81,5 +83,4 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
     this.postEditarPerfil = function( producto ) {
         return "";
     };
-
 }]);
