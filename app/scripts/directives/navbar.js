@@ -37,13 +37,14 @@ angular
             //Utilizamos estos métodos para acceder desde otro controlador
             $scope.hideLoginIcons = function (data) {
                 $scope.hideLoginIconsDirective(data);
+            };
 
-            scope.navbarHideElements = function () {
+            $scope.navbarHideElements = function () {
                 AuthService.ClearCredentials();
                 $location.path("/login");
                 scope.showNavbarElements=false;
             };
 
         }
-    };
+    }
 }]);

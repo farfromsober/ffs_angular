@@ -1,7 +1,7 @@
 angular.module("farfromsober").service("configService", function() {
 
     this.getURLBase = function () {
-        return 'http://localhost:8000/api/1.0/';
+        return 'http://forsale.cloudapp.net/api/1.0/';
     };
 
     this.placeHolderURL = "http://www.turnaron.es/media/miscelanea/sinfoto.jpg";
