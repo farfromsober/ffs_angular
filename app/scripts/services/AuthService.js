@@ -32,15 +32,6 @@ angular
 
         service.SetCredentials = function (username, password, user) {
             var authdata = Base64.encode(username + ':' + password);
-
-            /*$rootScope.globals = {
-                currentUser: {
-                    username: username,
-                    authdata: authdata
-                }
-            };*/
-            //$window.sessionStorage.globals = JSON.stringify($rootScope.globals);
-            //$window.sessionStorage.currentUser = JSON.stringify($rootScope.globals.currentUser);
             $window.sessionStorage.authdata = authdata;
             $window.sessionStorage.user = JSON.stringify(user);
             $window.sessionStorage.showNavBar = true;
@@ -48,17 +39,11 @@ angular
         };
 
         service.ClearCredentials = function () {
-            console.log("CLEAR CREDENTIALS");
-            //delete $window.sessionStorage.currentUser;
+            //console.log("CLEAR CREDENTIALS");
             delete $window.sessionStorage.user;
             delete $window.sessionStorage.authdata;
             $rootScope.user = {};
             $rootScope.user = null;
-
-            delete $window.sessionStorage.globals;
-            $rootScope.globals = {};
-            $rootScope.globals = null;
-
             $window.sessionStorage.showNavBar = false;
         };
 

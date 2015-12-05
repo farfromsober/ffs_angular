@@ -9,11 +9,9 @@ angular
                 if (response.status == 200) {
                     //debugger;
                     AuthService.SetCredentials($scope.username, $scope.password, response.data);
-                    $scope.navbarShowElements();
+                    $location.path("/productos")
                 } else {
-                    debugger;
-                    console.log(response);
-                    $scope.error = "El nombre de usuario o el password introducidos son incorrectos"//response.message;
+                    $scope.error = "El nombre de usuario o el password introducidos son incorrectos"
                     $scope.dataLoading = false;
                 }
             });

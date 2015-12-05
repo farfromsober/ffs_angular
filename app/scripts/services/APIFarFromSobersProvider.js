@@ -1,22 +1,14 @@
 angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$filter","$q","configService", "$rootScope", function($http,$filter,$q,configService, $rootScope) {
 
     this.getProductos = function() {
-        debugger;
         //Utilizamos la caché para obtener los datos ahorrandonos la llamada a la API
         var config = {
             cache: true//,
-            //headers: {'Authorization': 'Basic bWlndWVsYW5nZWw6MTIzNDU2'}
         }
-        //return $http.get(configService.getFakeURLBase() + "get/NyJpZWxQl", config);
-        //$http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
         return $http.get(configService.getURLBase() + "products/", config)
             .then(function (response) {
-                debugger;
-                console.log(response);
                 return response;
             }, function (response) {
-                debugger;
-                console.log(response);
                 return response;
             });
     };
@@ -72,13 +64,10 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
             user : username,
             password : password
         };
-        console.log("userObject: "+userObject);
         return $http.post(configService.getURLBase() + "login/", userObject)
             .then(function (response) {
-                console.log(response);
                 callback(response);
             }, function (response) {
-                console.log(response);
                 callback(response);
             });
     };

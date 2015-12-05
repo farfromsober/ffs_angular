@@ -145,7 +145,6 @@ angular
 
             $rootScope.$on('$locationChangeStart', function (event, next, current) {
 
-                console.log("path: "+$location.path());
                 if (!AuthService.GetUser()) {
                     $rootScope.user = {};
                     $rootScope.user = null;
@@ -155,7 +154,7 @@ angular
                         $location.path('/login');
                     }
                 } else {
-                    console.log("Usuario ya logueado!!!!");
+                    //console.log("Usuario ya logueado!!!!");
                     $rootScope.user = JSON.parse(AuthService.GetUser());
                     $rootScope.showNavbarElements=$window.sessionStorage.showNavBar;
                     $http.defaults.headers.common['Authorization'] = 'Basic ' + $window.sessionStorage.authdata;
