@@ -7,7 +7,7 @@ angular
         /*scope: {
             userIsLoged: '@'
         },*/
-        link: function (scope) {
+        link: function (scope, element, attrs) {
 
             scope.findProducts = function (){
                 var name = scope.form.inputFindProducts.$viewValue;
@@ -18,9 +18,16 @@ angular
                 $location.path("/findproductos").search({ category: category, name: name, distance: distance });
             };
 
-            scope.logout = function () {
+            scope.navbarShowElements = function () {
+                scope.user = JSON.parse(AuthService.GetUser());
+                $location.path("/productos")
+                scope.showNavbarElements=true;
+            };
+
+            scope.navbarHideElements = function () {
                 AuthService.ClearCredentials();
                 $location.path("/login")
+                scope.showNavbarElements=false;
             };
 
         }
