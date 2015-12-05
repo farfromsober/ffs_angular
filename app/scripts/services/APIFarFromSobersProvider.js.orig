@@ -1,10 +1,18 @@
-angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$filter","$q","configService", "$rootScope", function($http,$filter,$q,configService, $rootScope) {
+angular.module("farfromsober")
+    .service("APIFarFromSobersProvider", ["$http","$filter","$q","configService", "$rootScope", function($http,$filter,$q,configService, $rootScope) {
 
     this.getProductos = function() {
         //Utilizamos la caché para obtener los datos ahorrandonos la llamada a la API
         var config = {
             cache: true//,
+<<<<<<< HEAD
+            //headers: {'Authorization': 'Basic bWlndWVsYW5nZWw6MTIzNDU2'}
+        };
+        //return $http.get(configService.getFakeURLBase() + "get/NyJpZWxQl", config);
+        //$http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
+=======
         }
+>>>>>>> feature/login
         return $http.get(configService.getURLBase() + "products/", config)
             .then(function (response) {
                 return response;
@@ -18,7 +26,7 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         //TODO Modificar el api al que llamamos para obetener un listado de productos
         var config = {
             cache: true
-        }
+        };
         //Crear la url con los parametros que nos llegan
         return $http.get(configService.getFakeURLBase() + "get/NyJpZWxQl", config)
     };
@@ -29,7 +37,7 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
 
         var config = {
             cache: true
-        }
+        };
 
         var promise = $q.defer();
         $http.get(configService.getFakeURLBase() + "get/NyJpZWxQl", config).then(function (data) {

@@ -21,11 +21,9 @@
                     </a>
                     <div class="form-group">
                         <select class="form-control" name="selectCategoria" ng-model="categoria">
-                            <option>Todas</option>
-                            <option>Pepitooooooooo</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option value=""> </option>
+                            <option ng-repeat="categoria in categorias" value="{{ categoria.name }}">
+                            {{ categoria.name }}</option>
                         </select>
 
                         <input type="text" class="form-control" placeholder="Buscar productos" name="inputFindProducts" id="inputFindProducts" ng-model="inputSearch">
