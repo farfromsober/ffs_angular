@@ -1,15 +1,25 @@
-angular
-    .module("farfromsober")
-    .service("APIFarFromSobersProvider", ["$http","$filter","$q","configService", function($http,$filter,$q,configService) {
+angular.module("farfromsober")
+    .service("APIFarFromSobersProvider", ["$http","$filter","$q","configService", "$rootScope", function($http,$filter,$q,configService, $rootScope) {
 
     this.getProductos = function() {
-
+        debugger;
         //Utilizamos la caché para obtener los datos ahorrandonos la llamada a la API
         var config = {
-            cache: true
+            cache: true//,
+            //headers: {'Authorization': 'Basic bWlndWVsYW5nZWw6MTIzNDU2'}
         };
-        
-        return $http.get(configService.getURLBase() + "products/", config);
+        //return $http.get(configService.getFakeURLBase() + "get/NyJpZWxQl", config);
+        //$http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
+        return $http.get(configService.getURLBase() + "products/", config)
+            .then(function (response) {
+                debugger;
+                console.log(response);
+                return response;
+            }, function (response) {
+                debugger;
+                console.log(response);
+                return response;
+            });
     };
 
     this.getProductoWithParam = function( category, name, distance ) {
@@ -19,7 +29,7 @@ angular
             cache: true
         };
         //Crear la url con los parametros que nos llegan
-        return $http.get(configService.getURLBase() + "get/NyJpZWxQl", config);
+        return $http.get(configService.getFakeURLBase() + "get/NyJpZWxQl", config)
     };
 
     this.getProductoById = function( id ) {
@@ -31,7 +41,7 @@ angular
         };
 
         var promise = $q.defer();
-        $http.get(configService.getURLBase() + "get/NyJpZWxQl", config).then(function (data) {
+        $http.get(configService.getFakeURLBase() + "get/NyJpZWxQl", config).then(function (data) {
             var producto = $filter("filter")(data.data, {"_id": id})[0];
             promise.resolve(producto);
         });
@@ -69,9 +79,20 @@ angular
         return "";
     };
 
-    this.getLoginUsuario = function( user, pass ) {
-        //TODO Debemos añadir el user y la pass en la llamada a la api
-        return $http.get(configService.getURLBase() + "get/NJsNmZgQe");
+    this.getLoginUsuario = function(username, password, callback) {
+        var userObject = {
+            user : username,
+            password : password
+        };
+        console.log("userObject: "+userObject);
+        return $http.post(configService.getURLBase() + "login/", userObject)
+            .then(function (response) {
+                console.log(response);
+                callback(response);
+            }, function (response) {
+                console.log(response);
+                callback(response);
+            });
     };
 
     this.postRegistroUsuario = function( usuario ) {
@@ -85,5 +106,4 @@ angular
     this.postEditarPerfil = function( producto ) {
         return "";
     };
-
 }]);

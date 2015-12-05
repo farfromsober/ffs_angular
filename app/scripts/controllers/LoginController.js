@@ -1,25 +1,21 @@
 angular
     .module("farfromsober")
-    .controller("LoginController", ["$scope", "APIFarFromSobersProvider", function($scope, APIFarFromSobersProvider) {
+    .controller("LoginController", ["$scope", "APIFarFromSobersProvider", "$rootScope", "$location", "AuthService", function($scope, APIFarFromSobersProvider, $rootScope, $location, AuthService) {
 
-        $scope.submit = function() {
-            console.log($scope.user + $scope.pass);
+        $scope.submit = function () {
+            $scope.dataLoading = true;
 
-            APIFarFromSobersProvider.getLoginUsuario($scope.user,$scope.pass)
-                .then(function(response) {
-                    //Salimos de la promise para poder llamar a la directiva
-                    $scope.callDirectiveToHide(response.data);
-                }, function(response) {
+            APIFarFromSobersProvider.getLoginUsuario($scope.username,$scope.password, function (response) {
+                if (response.status == 200) {
+                    //debugger;
+                    AuthService.SetCredentials($scope.username, $scope.password, response.data);
+                    $scope.navbarShowElements();
+                } else {
+                    debugger;
                     console.log(response);
-                });
-
-
-        }
-
-        $scope.callDirectiveToHide = function(data) {
-            //Llamamos al método de la directica nabvar
-            this.hideLoginIcons(data);
-        }
-
-
+                    $scope.error = "El nombre de usuario o el password introducidos son incorrectos"//response.message;
+                    $scope.dataLoading = false;
+                }
+            });
+        };
     }]);

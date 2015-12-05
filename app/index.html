@@ -10,6 +10,7 @@
     <script src="vendor/angular-route.min.js"></script>
     <script src="vendor/angular-route-segment.min.js"></script>
     <script src="vendor/angular-locale_es-es.js"></script>
+    <script src="vendor/angular-cookies.min.js"></script>
     <script src="scripts/app.js"></script>
 
     <script src="scripts/controllers/LoginController.js"></script>
@@ -23,6 +24,7 @@
     <script src="scripts/controllers/RegistroController.js"></script>
     <script src="scripts/controllers/VenderController.js"></script>
     <script src="scripts/controllers/SectionController.js"></script>
+    <script src="scripts/controllers/PasswordController.js"></script>
     <script src="scripts/directives/navbar.js"></script>
     <script src="scripts/directives/elementoTablaProductos.js"></script>
     <script src="scripts/directives/elementoUsuario.js"></script>
@@ -30,12 +32,13 @@
     <script src="scripts/services/APIFarFromSobersProvider.js"></script>
     <script src="scripts/filters/FechaVenta.js"></script>
     <script src="scripts/services/utils/Config.js"></script>
+    <script src="scripts/services/AuthService.js"></script>
 </head>
 <body>
 
     <navbar-directive></navbar-directive>
 
-    <section app-view-segment="0" ng-controller="SectionController"></section>
+    <section class="body" app-view-segment="0" ng-controller="SectionController"></section>
 
 </body>
 </html>

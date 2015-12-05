@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
 
         <div class="navbar-header">
@@ -8,13 +8,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <a class="navbar-brand" href="#">4Sale!</a>
         </div>
 
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-            <div class="nav navbar-nav navbar-center">
+            <!-- Ponemos el ng-show para ocultar toda la barra de búsqueda cuando no estamos logueados -->
+            <div ng-show="showNavbarElements" class="nav navbar-nav navbar-center">
                 <form class="navbar-form" role="search" name="form">
                     <a class="glyphicon glyphicon-home" href="#/productos">
                     </a>
@@ -43,16 +44,14 @@
 
             </div>
 
-            <div ng-hide="iconsLogin">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#/login"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="#/registro"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
-                </ul>
-            </div>
-            <div ng-show="iconsProfile">
+            <div ng-show="showNavbarElements">
                 <ul class="nav navbar-nav navbar-right">
                     <li><img ng-src="" class="img-navbar-profile" width="40px" height="40px"></li>
-                    <li class="li-navbar-profile-text"><span class="text-navbar-name">{{ userName }}</span> <span class="text-navbar-products"> {{ sales }} Productos</span></li>
+                    <li class="li-navbar-profile-text">
+                        <span class="text-navbar-name">{{ user.user.username }}</span>
+                        <span class="text-navbar-products"> {{ user.sales }} Productos</span>
+                    </li>
+                    <li><a ng-click="navbarHideElements()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 </ul>
             </div>
         </div>

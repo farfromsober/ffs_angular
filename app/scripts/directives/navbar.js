@@ -1,15 +1,14 @@
 angular
     .module("farfromsober")
-    .directive("navbarDirective", ["$location", "APIFarFromSobersProvider", function($location, APIFarFromSobersProvider) {
+    .directive("navbarDirective", ["$location", "AuthService", "APIFarFromSobersProvider", function($location, AuthService, APIFarFromSobersProvider) {
 
     return {
         templateUrl: "views/templates/Navbar.html",
         /*scope: {
-            iconsLogin: '=',
-            iconsProfile: '='
+            userIsLoged: '@'
         },*/
-        transclude: false,
-        link: function postLink(scope) {
+        link: function (scope, element, attrs) {
+
             scope.findProducts = function (){
                 var name = scope.form.inputFindProducts.$viewValue;
                 var category = scope.form.selectCategoria.$viewValue;
@@ -17,22 +16,12 @@ angular
 
                 //Llamamos a la routesegment con los parametros a buscar
                 $location.path("/findproductos").search({ category: category, name: name, distance: distance });
-
             };
 
-            scope.hideLoginIconsDirective = function (data) {
-                //Ocultamos el boton de Login y mostramos el perfil logueado
-                scope.userName = data[0].username;
-                scope.sales = data[0].sales;
-                scope.iconsLogin = true;
-                scope.iconsProfile = true;
-
-            };
-
-            scope.showLoginIconsDirective = function () {
-                //Mostramos el boton de Login y ocultamos el perfil logueado
-                scope.iconsLogin = false;
-                scope.iconsProfile = false;
+            scope.navbarShowElements = function () {
+                scope.user = JSON.parse(AuthService.GetUser());
+                $location.path("/productos");
+                scope.showNavbarElements=true;
             };
 
             // Pasamos las categorías
@@ -41,11 +30,6 @@ angular
                 scope.categorias = data.data;
 
             });
-            /*scope.categorias = [
-                    {index:1, name:'primera'},
-                    {index:2, name:'segunda'},
-                    {index:3, name:'tercera'}
-            ];*/
 
 
         },
@@ -54,12 +38,12 @@ angular
             $scope.hideLoginIcons = function (data) {
                 $scope.hideLoginIconsDirective(data);
 
+            scope.navbarHideElements = function () {
+                AuthService.ClearCredentials();
+                $location.path("/login");
+                scope.showNavbarElements=false;
             };
 
-            $scope.showLoginIcons = function () {
-                $scope.showLoginIconsDirective();
-            };
         }
-
     };
 }]);
