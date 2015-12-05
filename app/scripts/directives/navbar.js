@@ -1,4 +1,6 @@
-angular.module("farfromsober").directive("navbarDirective", ["$location", function($location) {
+angular
+    .module("farfromsober")
+    .directive("navbarDirective", ["$location", "APIFarFromSobersProvider", function($location, APIFarFromSobersProvider) {
 
     return {
         templateUrl: "views/templates/Navbar.html",
@@ -32,6 +34,19 @@ angular.module("farfromsober").directive("navbarDirective", ["$location", functi
                 scope.iconsLogin = false;
                 scope.iconsProfile = false;
             };
+
+            // Pasamos las categorías
+            APIFarFromSobersProvider.getCategorias().then(function(data){
+
+                scope.categorias = data.data;
+
+            });
+            /*scope.categorias = [
+                    {index:1, name:'primera'},
+                    {index:2, name:'segunda'},
+                    {index:3, name:'tercera'}
+            ];*/
+
 
         },
         controller: function($scope){

@@ -8,7 +8,8 @@ angular
         var config = {
             cache: true
         };
-        return $http.get(configService.getURLBase() + "get/NyJpZWxQl", config);
+        
+        return $http.get(configService.getURLBase() + "products/", config);
     };
 
     this.getProductoWithParam = function( category, name, distance ) {
@@ -35,6 +36,17 @@ angular
             promise.resolve(producto);
         });
         return promise.promise;
+    };
+
+
+    this.getCategorias = function(){
+
+        //Utilizamos la caché para obtener los datos ahorrandonos la llamada a la API
+        var config = {
+            cache: true
+        };
+        return $http.get(configService.getURLBase() + "get/E1BV0xy7x", config);
+
     };
 
     this.getPerfilVendidosById = function( id ) {

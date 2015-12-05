@@ -1,7 +1,7 @@
 angular.module("farfromsober").service("configService", function() {
 
     this.getURLBase = function () {
-        return 'http://beta.json-generator.com/api/json/';
+        return 'http://localhost:8000/api/1.0/';
     };
 
     this.placeHolderURL = "http://www.turnaron.es/media/miscelanea/sinfoto.jpg";
