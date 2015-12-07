@@ -207,3 +207,48 @@
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
+
+
+
+/* Detalle producto */
+.div-left-column-detail-product {
+    padding-left: 100px;
+    padding-top: 10px;
+}
+
+.div-right-column-detail-product {
+    padding-right: 100px;
+    padding-top: 10px;
+}
+
+
+.img-big-detail-product {
+    width: 100%;
+    border: 4px solid #fc7232;
+}
+
+.img-small-detail-product {
+    border: 2px solid #fc7232;
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.img-avatar-detail-product{
+    width: 40px;
+    height: 40px;
+    border: 1px solid #fcb797;
+}
+
+.p-price-detail-product{
+    float: right;
+    font-size: 24px;
+    font-family: "Open Sans";
+}
+
+.p-user-detail-product{
+    float: left;
+    font-size: 14px;
+    font-family: "Helvetica Neue";
+}

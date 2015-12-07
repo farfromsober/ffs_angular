@@ -1,26 +1,22 @@
-<div class="col-md-7"
-     style="padding-left:100px; padding-top:10px;">
+<div class="col-md-7 div-left-column-detail-product">
 
-    <img ng-src="{{ selectedImage }}" style="width:100%;">
+    <img ng-src="{{ selectedImage }}" class="img-big-detail-product">
 
     <br><br>
 
-    <img ng-src="{{ ::producto.images[0] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
-         ng-click="changeImage(0)">
-    <img ng-src="{{ ::producto.images[1] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
-         ng-click="changeImage(1)">
-    <img ng-src="{{ ::producto.images[2] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
-         ng-click="changeImage(2)">
-    <img ng-src="{{ ::producto.images[3] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
-         ng-click="changeImage(3)">
+    <img ng-src="{{ ::producto.images[0] }}" class="img-small-detail-product" ng-click="changeImage(0)">
+    <img ng-src="{{ ::producto.images[1] }}" class="img-small-detail-product" ng-click="changeImage(1)">
+    <img ng-src="{{ ::producto.images[2] }}" class="img-small-detail-product" ng-click="changeImage(2)">
+    <img ng-src="{{ ::producto.images[3] }}" class="img-small-detail-product" ng-click="changeImage(3)">
 
 </div>
 
-<div class="col-md-5"
-     style="padding-right:100px; padding-top:10px;">
+<div class="col-md-5 div-right-column-detail-product">
 
      <div class="well well-sm">
-         <h4>{{ ::producto.price }}€</h4>
+         <img ng-src="{{ ::producto.seller.avatar }}" class="img-circle img-avatar-detail-product">
+         <p class="p-user-detail-product">{{ ::producto.seller.user.username }}</p>
+         <p class="p-price-detail-product">{{ ::producto.price }}€</p>
          <h3>{{ ::producto.name }}</h3>
          <p>{{ ::producto.description }}</p>
          <p> <span class="label label-default">{{ ::producto.category.name }} </span> </p>
