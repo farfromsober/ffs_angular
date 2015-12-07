@@ -1,6 +1,6 @@
 angular
     .module("farfromsober")
-    .directive("elementoTablaProductos", function(){
+    .directive("elementoTablaProductos", ["configService", function(configService){
 
         return {
             restrict: "AE",
@@ -10,8 +10,8 @@ angular
                 model: "="
             },
             link: function(scope){
-
+                scope.photoPlaceholderURL = configService.photoPlaceholderURL;
             }
         };
 
-    });
+    }]);

@@ -4,7 +4,7 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         //Utilizamos la caché para obtener los datos ahorrandonos la llamada a la API
         var config = {
             cache: true//,
-        }
+        };
         return $http.get(configService.getURLBase() + "products/", config)
             .then(function (response) {
                 return response;
@@ -15,12 +15,17 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
 
     this.getProductoWithParam = function( category, name, distance ) {
 
-        //TODO Modificar el api al que llamamos para obetener un listado de productos
         var config = {
             cache: true
-        }
+        };
+        
         //Crear la url con los parametros que nos llegan
-        return $http.get(configService.getFakeURLBase() + "get/NyJpZWxQl", config)
+        url = configService.getURLBase() + "products/?category=" + category;
+        url += "&name=" + name;
+        url += "&distance=" + distance;
+
+        return $http.get(url, config);
+
     };
 
     this.getProductoById = function( id ) {
@@ -29,11 +34,11 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
 
         var config = {
             cache: true
-        }
+        };
 
         var promise = $q.defer();
-        $http.get(configService.getFakeURLBase() + "get/NyJpZWxQl", config).then(function (data) {
-            var producto = $filter("filter")(data.data, {"_id": id})[0];
+        $http.get(configService.getURLBase() + "products/", config).then(function (data) {
+            var producto = $filter("filter")(data.data, {"id": id})[0];
             promise.resolve(producto);
         });
         return promise.promise;
