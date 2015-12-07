@@ -12,11 +12,73 @@
 
 .navbar a {
     cursor: pointer;
+}
+
+/***********************
+  ROUND BUTTONS
+************************/
+.round {
+    border-radius: 24px;
+}
+
+/***********************
+  CUSTON BTN VALUES
+************************/
+
+.btn {
+    padding: 10px 50px;
+    border: 0 none;
+    letter-spacing: 1px;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+.btn-primary {
+    background: #fc7232;
+    color: #ffffff;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: rgba(255, 125, 55, 0.87);
+}
+.btn-primary:active, .btn-primary.active {
+    background: #cd6734;
+    box-shadow: none;
+}
+
+/*********************************/
+
+.ffs-text-color {
+    color: #fc7232;
+}
+
+.ffs-button {
+    color: white;
+    background-color: #fc7232;
+}
+
+.navbar-4sale {
+    background-color: #fc7232;
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
 
-.body {
+.img-logo {
+    height: 100%;
+}
+
+.body, html {
+    width: 100%;
+    height: 100%;
     padding-top: 70px;
+    background-color: #fcdaca;
+}
+
+.jumbotron {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background-color: #fcdaca;
 }
 
 .text-description
