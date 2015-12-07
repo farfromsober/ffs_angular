@@ -87,8 +87,21 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         return "";
     };
 
-    this.postVentaProducto = function( producto ) {
-        return "";
+    this.postVentaProducto = function( producto, callback ) {
+        //Utilizamos la caché para obtener los datos ahorrandonos la llamada a la API
+        var config = {
+            cache: true//,
+        }
+        return $http.post(configService.getURLBase() + "products/", producto, config)
+            .then(function (response) {
+                debugger;
+                console.log(response);
+                callback(response) ;
+            }, function (response) {
+                debugger;
+                callback(response) ;
+                console.log(response);
+            });
     };
 
     this.postEditarPerfil = function( producto ) {
