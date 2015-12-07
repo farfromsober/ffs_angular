@@ -1,55 +1,41 @@
-<nav class="navbar navbar-inverse navbar-fixed-top navbar-4sale">
-    <div class="container-fluid">
-
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#/productos">
-                <img alt="Brand" class="img-logo" src="https://dl.dropboxusercontent.com/u/4539692/4SaleLogo.png">
-            </a>
-        </div>
-
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-            <!-- Ponemos el ng-show para ocultar toda la barra de búsqueda cuando no estamos logueados -->
-            <div ng-show="showNavbarElements" class="nav navbar-nav navbar-center">
-                <form class="navbar-form" role="search" name="form">
-                    <a class="glyphicon glyphicon-home" href="#/productos">
-                    </a>
-                    <div class="form-group">
-                        <select class="form-control" name="selectCategoria" ng-model="categoria">
-                            <option value=""> </option>
-                            <option ng-repeat="categoria in categorias" value="{{ categoria.name }}">
-                            {{ categoria.name }}</option>
-                        </select>
-
-                        <input type="text" class="form-control" placeholder="Buscar productos" name="inputFindProducts" id="inputFindProducts" ng-model="inputSearch">
-
-                        <select class="form-control" name="selectDistancia" ng-model="distancia">
-                            <option>Todas</option>
-                            <option>Pepitooooooooo</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-
-                    <a class="glyphicon glyphicon-search" ng-click="findProducts()">
-                    </a>
-
-                </form>
-
+<nav class="navbar navbar-default navbar-fixed-top navbar-4sale">
+        <div class="container-fluid">
+            <div class="navbar-header text-left">
+                <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed" aria-expanded="true">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#">
+                    <img src="https://dl.dropboxusercontent.com/u/4539692/4SaleLogo.png">
+                </a>
+                <img src="https://dl.dropboxusercontent.com/u/4539692/4sale-navbar.png">
             </div>
 
-            <div ng-show="showNavbarElements">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><img ng-src="" class="img-navbar-profile" width="40px" height="40px"></li>
-                    <li class="li-navbar-profile-text">
-                        <span class="text-navbar-name">{{ user.user.username }}</span>
-                        <span class="text-navbar-products"> {{ user.sales }} Productos</span>
-                    </li>
-                    <li><a ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                </ul>
+            <div class="navbar-collapse collapse text-center" uib-collapse="isCollapsed" aria-expanded="true">
+                        <div class="navbar-form">
+                            <select class="form-control" name="selectCategoria">
+                                <option selected>Motor</option>
+                                <option>Tecnología</option>
+                                <option>Deportes</option>
+                                <option>General</option>
+                            </select>
+                            <input type="text" class="form-control" placeholder="Buscar productos" name="inputFindProducts" id="inputFindProducts" ng-model="inputSearch">
+                            <select class="form-control" name="selectDistancia">
+                                <option>Todas</option>
+                                <option>Pepitooooooooo</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                            <a class="glyphicon glyphicon-search" ng-click="findProducts()">
+                            </a>
+                        </div>
+            </div>
+            <div class="navbar-collapse collapse text-right" uib-collapse="isCollapsed" aria-expanded="true">
+                <li><a ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </div>
         </div>
-    </div>
+
 </nav>

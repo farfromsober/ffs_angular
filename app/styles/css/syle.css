@@ -10,8 +10,38 @@
     height:100%;
 }
 
+.navbar-center2 {
+    margin:0;
+    float:none;
+    text-align:center;
+
+}
+
+
+
 .navbar a {
     cursor: pointer;
+}
+
+.vcenter {
+    vertical-align: middle;
+    line-height:100px;
+}
+
+.vcenter2 {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:100px;
+}
+
+.navbar-4sale {
+    background-color: #fc7232;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    line-height: 100px;
+    height: 100px;
+    padding-top: 0;
 }
 
 /***********************
@@ -57,14 +87,6 @@
     background-color: #fc7232;
 }
 
-.navbar-4sale {
-    background-color: #fc7232;
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
-}
-
-.img-logo {
-    height: 100%;
-}
 
 .body, html {
     width: 100%;

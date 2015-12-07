@@ -9,6 +9,8 @@ angular
         },*/
         link: function (scope) {
 
+            scope.isCollapsed = true;
+
             scope.findProducts = function (){
                 var name = scope.form.inputFindProducts.$viewValue;
                 var category = scope.form.selectCategoria.$viewValue;
