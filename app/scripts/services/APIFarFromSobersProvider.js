@@ -25,18 +25,16 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
 
     this.getProductoById = function( id ) {
 
-        console.log(id);
-
         var config = {
             cache: true
         }
 
-        var promise = $q.defer();
-        $http.get(configService.getFakeURLBase() + "get/NyJpZWxQl", config).then(function (data) {
-            var producto = $filter("filter")(data.data, {"_id": id})[0];
-            promise.resolve(producto);
-        });
-        return promise.promise;
+        return $http.get(configService.getURLBase() + "products/" + id + "/", config)
+            .then(function (response) {
+                return response.data;
+            }, function (response) {
+                return response.data;
+            });
     };
 
 

@@ -20,9 +20,6 @@
 .custom-height {
     max-height:20px;
 }
-.custom-height2 {
-    max-height:100px;
-}
 
 .navbar-form {
     margin-bottom: 0;
@@ -31,10 +28,6 @@
 
 .navbar a {
     cursor: pointer;
-}
-
-.vcenter {
-    vertical-align: middle;
 }
 
 .navbar-4sale {
