@@ -1,18 +1,28 @@
 <div class="col-md-7"
      style="padding-left:100px; padding-top:10px;">
 
-    <img ng-src="{{ selectedImage }}" style="width:100%;">
+    <img ng-show="selectedImage" ng-src="{{ selectedImage }}" style="width:100%;">
+    <img ng-hide="selectedImage" ng-src="{{ ::photoPlaceholderURL }}" style="width:100%;">
 
     <br><br>
 
-    <img ng-src="{{ ::producto.images[0] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
+    <img ng-show="producto.images[0]" ng-src="{{ ::producto.images[0] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
          ng-click="changeImage(0)">
-    <img ng-src="{{ ::producto.images[1] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
+    <img ng-hide="producto.images[0]" ng-src="{{ ::photoPlaceholderURL }}"
+         style="width:100px; height:100px; margin-right: 20px; cursor:pointer">
+    <img ng-show="producto.images[1]" ng-src="{{ ::producto.images[1] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
          ng-click="changeImage(1)">
-    <img ng-src="{{ ::producto.images[2] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
+    <img ng-hide="producto.images[1]" ng-src="{{ ::photoPlaceholderURL }}"
+         style="width:100px; height:100px; margin-right: 20px; cursor:pointer">
+    <img ng-show="producto.images[2]" ng-src="{{ ::producto.images[2] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
          ng-click="changeImage(2)">
-    <img ng-src="{{ ::producto.images[3] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
+    <img ng-hide="producto.images[2]" ng-src="{{ ::photoPlaceholderURL }}"
+         style="width:100px; height:100px; margin-right: 20px; cursor:pointer">
+    <img ng-show="producto.images[3]" ng-src="{{ ::producto.images[3] }}" style="width:100px; height:100px; margin-right: 20px; cursor:pointer"
          ng-click="changeImage(3)">
+    <img ng-hide="producto.images[3]" ng-src="{{ ::photoPlaceholderURL }}"
+         style="width:100px; height:100px; margin-right: 20px; cursor:pointer">
+
 
 </div>
 

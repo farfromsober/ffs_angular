@@ -1,6 +1,6 @@
 angular
     .module("farfromsober")
-    .directive("elementoUsuario", function(){
+    .directive("elementoUsuario", ["configService", function(configService){
 
         return {
             restrict: "AE",
@@ -10,8 +10,8 @@ angular
                 model: "="
             },
             link: function(scope){
-
+                scope.avatarPlaceholderURL = configService.avatarPlaceholderURL;
             }
         };
 
-    });
+    }]);

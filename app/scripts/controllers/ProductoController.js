@@ -1,6 +1,6 @@
 angular
     .module("farfromsober")
-    .controller("ProductoController", ["$scope", "Producto", function($scope, Producto) {
+    .controller("ProductoController", ["$scope", "Producto", "configService", function($scope, Producto, configService) {
         console.log(Producto);
         $scope.producto = Producto;
 
@@ -8,7 +8,9 @@ angular
 
         $scope.changeImage = function(n){
             $scope.selectedImage = Producto.images[n]
-        }
+        };
+
+        $scope.photoPlaceholderURL = configService.photoPlaceholderURL;
 
 
     }]);
