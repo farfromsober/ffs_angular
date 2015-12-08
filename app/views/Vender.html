@@ -21,11 +21,15 @@
     <div class="form-group">
         <label for="product_category" class="col-sm-2 control-label">Category</label>
         <div class="col-sm-5 dropdown">
-            <select class="form-control" id="product_category" ng-model="product_category">
-                <option selected>Motor</option>
-                <option>Tecnología</option>
-                <option>Deportes</option>
-                <option>General</option>
+            <select class="form-control" id="product_category" ng-model="categoria">
+                <option value=""> </option>
+                <!--
+                <option ng-repeat="categoria in categorias" value="{{ categoria.name }}">
+                {{ categoria.name }}</option>-->
+                <option value="3">Motor</option>
+                <option value="2">Tecnología</option>
+                <option value="1">Deportes</option>
+                <option value="0">General</option>
             </select>
         </div>
     </div>

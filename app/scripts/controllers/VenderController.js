@@ -1,6 +1,6 @@
 angular
     .module("farfromsober")
-    .controller("VenderController", ["$scope", "APIFarFromSobersProvider", "$location", function($scope, APIFarFromSobersProvider, $location) {
+    .controller("VenderController", ["$scope", "APIFarFromSobersProvider", "$location", "azureBlob", function($scope, APIFarFromSobersProvider, $location, azureBlob) {
         $scope.submit = function () {
             $scope.dataLoading = true;
 
@@ -9,8 +9,24 @@ angular
                 name: $scope.product_name,
                 description: $scope.product_description,
                 price: $scope.product_price,
-                category: $scope.category
+                category: {
+                    index: $scope.categoria
+                }
             }
+
+            /*
+            var azureConfig = {
+                baseUrl: "https://farfromsober.blob.core.windows.net/farfromsober-images-container/subida_angular_prueba",
+                sasToken: "?tv2oqlfCxzFUm7/dYgBGD6YW5K1eQOROVGqqDVm3ijaJpdhxwpkW5OttAFS70++IAcEReSdc0fR/zc06CKrkWQ==",
+                file: "https://dl.dropboxusercontent.com/u/4539692/4sale-navbar.png",
+                progress:"null",
+                complete:"null",
+                error:"null",
+                blockSize:"null"
+            }
+
+            azureBlob.upload(azureConfig);
+            */
 
             APIFarFromSobersProvider.postVentaProducto(productObject, function (response) {
                 if (response.status == 201) {
