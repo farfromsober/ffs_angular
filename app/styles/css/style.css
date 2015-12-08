@@ -62,6 +62,10 @@
 
 /* ElementoTablaProductos */
 
+a.celda-producto-link {
+    text-decoration: none;
+}
+
 div.fill {
     padding: 6px;
     position:relative;
