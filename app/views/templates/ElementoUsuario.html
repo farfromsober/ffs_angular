@@ -1,11 +1,11 @@
 <div>
     <img ng-show="model.avatar" ng-src="{{ ::model.avatar }}"
-         style="background-color: #255625; border-radius: 800px;  float:left;" width="50px" height="50px">
+         style="background-color: #fcb797; border-radius: 800px;  float:left;" width="50px" height="50px">
     <img ng-hide="model.avatar" ng-src="{{ ::avatarPlaceholderURL }}"
-         style="background-color: #255625; border-radius: 800px;  float:left;" width="50px" height="50px">
+         style="background-color: #fcb797; border-radius: 800px;  float:left;" width="50px" height="50px">
     <p class="seller-profile"
        style="height:50px; vertical-align: middle; display: table-cell; padding-left:10px;">
         <b>{{ ::model.user.username }}</b><br>
-        {{ ::model.sales }} Productos vendidos
+        {{ ::model.sales }} Productos
     </p>
 </div>

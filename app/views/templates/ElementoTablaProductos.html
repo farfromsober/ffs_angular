@@ -2,14 +2,19 @@
 <div class="col-sm-6 col-md-3" style="width: 300px">
     <a ng-href="#/producto/{{ ::model.id}}/">
         <div class="thumbnail" style="box-shadow:1px 1px gray; border-radius: 10px">
-            <img ng-show="model.images[0]" ng-src="{{ ::model.images[0] }}" alt="" style="width:340px;height:300px">
-            <img ng-hide="model.images[0]" ng-src="{{ ::photoPlaceholderURL }}" alt="" style="width:340px;height:300px">
+            <div class="fill">
+                <img ng-show="model.images[0]" ng-src="{{ ::model.images[0] }}" alt="" >
+                <img ng-hide="model.images[0]" ng-src="{{ ::photoPlaceholderURL }}" alt="">
+            </div>
+
             <div class="caption">
-                <h5 class="text-title">{{ ::model.name }}</h5>
-                <h5>{{ ::model.price }}€</h5>
-                <div class="text-description">{{ ::model.description }}</div>
-                <p> <span class="label label-default">{{ ::model.category.name }} </span> </p>
-                <elemento-usuario model="model.seller"></elemento-usuario>
+            <div class="row">
+                <elemento-usuario model="model.seller" class="col-sm-8"></elemento-usuario>
+                <p id="celda-producto-precio" class="col-sm-4">{{ ::model.price }} €</p>
+            </div>
+                <h5 id="celda-producto-title">{{ ::model.name }}</h5>
+                <div id="celda-producto-description">{{ ::model.description }}</div>
+                <p id="celda-producto-category"> <span class="label label-default ">{{ ::model.category.name }} </span> </p>
             </div>
         </div>
     </a>
