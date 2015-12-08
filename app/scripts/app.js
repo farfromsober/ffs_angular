@@ -77,6 +77,13 @@ angular
             }
         });
 
+        $routeSegmentProvider.when("/perfil", "perfil_usuario");
+
+        $routeSegmentProvider.segment("perfil_usuario", {
+            controller: "PerfilusuarioController",
+            templateUrl: "views/PerfilUsuario.html"
+        });
+
         $routeSegmentProvider.when( "/perfil/:id/editar", "editar_perfil" );
 
         $routeSegmentProvider.segment( "editar_perfil", {

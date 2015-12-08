@@ -1,24 +1,39 @@
 /* Navbar*/
-.navbar-center
+
+#navbar-4sale-logo {
+    padding-left: 15px;
+}
+
+.navbar-4sale {
+    background-color: #fc7232;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    line-height: 100px;
+    min-height: 100px;
+    padding-top: 0;
+}
+
+
+.ffs-text-color {
+    color: #fc7232;
+}
+
+#multiline-button {
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    vertical-align: middle;
+    height: 50px;
+    line-height: 10px;
+    white-space: normal;
+    width: 150px;
+    text-align: left;
+}
+
+#inputFindProducts
 {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    top: 0;
-    text-align: center;
-    margin: auto;
-    height:100%;
-}
-
-.navbar-center2 {
-    margin:0;
-    float:none;
-    text-align:center;
-
-}
-
-.custom-height {
-    max-height:20px;
+    width: 300px;
 }
 
 .navbar-form {
@@ -30,57 +45,13 @@
     cursor: pointer;
 }
 
-.navbar-4sale {
-    background-color: #fc7232;
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    line-height: 100px;
-    min-height: 100px;
-    padding-top: 0;
+.img-navbar-profile {
+    background-color: #fcdaca;
+    border-radius: 800px;
 }
 
-/***********************
-  ROUND BUTTONS
-************************/
-.round {
-    border-radius: 24px;
-}
 
-/***********************
-  CUSTON BTN VALUES
-************************/
-
-.btn {
-    padding: 10px 50px;
-    border: 0 none;
-    letter-spacing: 1px;
-}
-.btn:focus, .btn:active:focus, .btn.active:focus {
-    outline: 0 none;
-}
-
-.btn-primary {
-    background: #fc7232;
-    color: #ffffff;
-}
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-    background: rgba(255, 125, 55, 0.87);
-}
-.btn-primary:active, .btn-primary.active {
-    background: #cd6734;
-    box-shadow: none;
-}
-
-/*********************************/
-
-.ffs-text-color {
-    color: #fc7232;
-}
-
-.ffs-button {
-    color: white;
-    background-color: #fc7232;
-}
-
+/* Body */
 
 .body, html {
     width: 100%;
@@ -89,13 +60,7 @@
     background-color: #fcdaca;
 }
 
-.jumbotron {
-    position: absolute;
-    top: 50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    background-color: #fcdaca;
-}
+/* ElementoTablaProductos */
 
 .text-description
 {
@@ -119,10 +84,8 @@
     -webkit-box-orient: vertical;
 }
 
-#inputFindProducts
-{
-    width: 300px;
-}
+
+/* Floating button Vender */
 
 .btn-circle-lg {
     width: 100px;
@@ -139,42 +102,6 @@
 }
 
 
-
-.img-navbar-profile {
-    background-color: #255625;
-    border-radius: 800px;
-}
-
-.li-navbar-profile-text {
-    margin-top: 5px;
-}
-
-.text-navbar-name {
-
-    margin-left: 10px;
-    color: white;
-}
-
-.text-navbar-products {
-    margin-left: 8px;
-    color: white;
-}
-
-
-.text-normal{
-    font-size: 14px;
-    font-family: "Open Sans";
-    color: #292525;
-}
-
-.text-small-header{
-    color: #fc7232;
-    font-size: 12px;
-    font-family: "Helvetica Neue";
-    font-weight: normal;
-    margin: 0 0 5px;
-}
-
 .img-share{
     float: left;
     margin-right: 15px;
@@ -184,6 +111,14 @@
 
 
 /* Login */
+
+.jumbotron {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background-color: #fcdaca;
+}
 
 .form-signin input[type="text"] {
     margin-bottom: 5px;
@@ -208,15 +143,63 @@
 .panel {
     margin-bottom: 20px;
     background-color: rgba(255, 255, 255, 0.75);
-    /*border: 1px solid transparent;*/
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
 
+/*********************************/
+
+/***********************
+  ROUND BUTTONS
+************************/
+.round {
+    border-radius: 24px;
+}
+
+/***********************
+  CUSTOM BTN VALUES
+************************/
+
+.btn {
+    padding: 10px 50px;
+    border: 0 none;
+    letter-spacing: 1px;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+.btn-primary {
+    background: #fc7232;
+    color: #ffffff;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: rgba(255, 125, 55, 0.87);
+}
+.btn-primary:active, .btn-primary.active {
+    background: #cd6734;
+    box-shadow: none;
+}
 
 
 /* Detalle producto */
+
+.text-normal{
+    font-size: 14px;
+    font-family: "Open Sans";
+    color: #292525;
+}
+
+.text-small-header{
+    color: #fc7232;
+    font-size: 12px;
+    font-family: "Helvetica Neue";
+    font-weight: normal;
+    margin: 0 0 5px;
+}
+
+
 .div-left-column-detail-product {
     padding-left: 100px;
     padding-top: 10px;
