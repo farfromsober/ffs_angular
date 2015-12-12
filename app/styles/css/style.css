@@ -1,3 +1,7 @@
+/* General */
+
+
+
 /* Navbar*/
 
 #navbar-4sale-logo {
@@ -302,4 +306,18 @@ a.btn-circle-lg {
     color: #292525;
     font-weight: 600;
     margin: 0;
+}
+
+.new-product-label{
+    text-transform: uppercase;
+    color: #fc7232;
+    font-size: 12px;
+    font-family: "Helvetica Neue";
+}
+
+.new-product-from-control{
+    border-color: #fcb797;
+    font-size: 14px;
+    font-family: "Helvetica Neue";
+    background: s;
 }

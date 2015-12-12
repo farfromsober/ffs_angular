@@ -1,6 +1,6 @@
 angular
     .module("farfromsober")
-    .controller("VenderController", ["$scope", "APIFarFromSobersProvider", "$location", "azureBlob", function($scope, APIFarFromSobersProvider, $location, azureBlob) {
+    .controller("VenderController", ["$scope", "APIFarFromSobersProvider", "$location", "azureBlob", "MessagesForUser", function($scope, APIFarFromSobersProvider, $location, azureBlob, MessagesForUser) {
         $scope.submit = function () {
             $scope.dataLoading = true;
 
@@ -32,10 +32,18 @@ angular
                 if (response.status == 201) {
                     debugger;
                     console.log(response);
+                    MessagesForUser.setSuccessMessage("Producto creado correctamente");
                     $location.path("/productos")
                 } else {
                     debugger;
-                    $scope.error = "Ha habido problemas al crear el producto. Por favor, inténtalo de nuevo."
+                    MessagesForUser.setErrorMessage("Ha habido problemas al crear el producto. Por favor, inténtalo de nuevo.")
+                    $scope.error = MessagesForUser.getErrorMessage();
+                    setTimeout(function () {
+                        $scope.$apply(function() {
+                            $scope.error = null;
+                            MessagesForUser.setErrorMessage("");
+                        });
+                    }, 3000);
                     $scope.dataLoading = false;
                 }
             });
