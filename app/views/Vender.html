@@ -34,30 +34,38 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <!--<div class="form-group">
         <label for="product_image_1" class="col-sm-2 control-label new-product-label">Image 1</label>
         <div class="col-sm-5 kv-avatar">
-            <input type="file" id="product_image_1" ng-model="product_image_1">
+            <input type="file" id="product_image_1" name="product_image_1" ng-model="product_image_1">
         </div>
     </div>
     <div class="form-group">
         <label for="product_image_2" class="col-sm-2 control-label new-product-label">Image 2</label>
         <div class="col-sm-5">
-            <input type="file" id="product_image_2" ng-model="product_image_2">
+            <input type="file" id="product_image_2" name="product_image_2" ng-model="product_image_2">
         </div>
     </div>
     <div class="form-group">
         <label for="product_image_3" class="col-sm-2 control-label new-product-label">Image 3</label>
         <div class="col-sm-5">
-            <input type="file" id="product_image_3" ng-model="product_image_3">
+            <input type="file" id="product_image_3" name="product_image_3" ng-model="product_image_3">
         </div>
     </div>
     <div class="form-group">
         <label for="product_image_4" class="col-sm-2 control-label new-product-label">Image 4</label>
         <div class="col-sm-5">
-            <input type="file" id="product_image_4" ng-model="product_image_4">
+            <input type="file" id="product_image_4" name="product_image_4" ng-model="product_image_4">
         </div>
+    </div>-->
+
+
+    <div class="form-group">
+        <label for="imageSelector" class="col-sm-2 control-label new-product-label">Image Label</label>
+        <image-selector id="imageSelector" image-selected="upload(file)"></image-selector>
     </div>
+
+
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-success">Put on sale!</button>

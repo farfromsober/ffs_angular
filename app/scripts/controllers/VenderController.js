@@ -1,6 +1,16 @@
 angular
     .module("farfromsober")
     .controller("VenderController", ["$scope", "APIFarFromSobersProvider", "$location", "azureBlob", "MessagesForUser", function($scope, APIFarFromSobersProvider, $location, azureBlob, MessagesForUser) {
+
+        $scope.upload = function(file) {
+            debugger;
+            APIFarFromSobersProvider.getSasURL("carnet180", function(sasUrl){
+                APIFarFromSobersProvider.uploadImage(sasUrl, file, function(response) {
+
+                });
+            });
+        };
+
         $scope.submit = function () {
             $scope.dataLoading = true;
 
@@ -14,29 +24,28 @@ angular
                 }
             }
 
-            /*
-            var azureConfig = {
-                baseUrl: "https://farfromsober.blob.core.windows.net/farfromsober-images-container/subida_angular_prueba",
-                sasToken: "?tv2oqlfCxzFUm7/dYgBGD6YW5K1eQOROVGqqDVm3ijaJpdhxwpkW5OttAFS70++IAcEReSdc0fR/zc06CKrkWQ==",
-                file: "https://dl.dropboxusercontent.com/u/4539692/4sale-navbar.png",
-                progress:"null",
-                complete:"null",
-                error:"null",
-                blockSize:"null"
-            }
+            var file_1 = document.getElementById('product_image_1').files[0];
+            var file_2 = document.getElementById('product_image_2').files[0];
+            var file_3 = document.getElementById('product_image_3').files[0];
+            var file_4 = document.getElementById('product_image_4').files[0];
 
-            azureBlob.upload(azureConfig);
-            */
+            debugger;
+            var images = [
+                file_1,
+                file_2,
+                file_3,
+                file_4
+            ];
 
             APIFarFromSobersProvider.postVentaProducto(productObject, function (response) {
                 if (response.status == 201) {
                     debugger;
                     console.log(response);
-                    MessagesForUser.setSuccessMessage("Producto creado correctamente");
-                    $location.path("/productos")
+
+
                 } else {
                     debugger;
-                    MessagesForUser.setErrorMessage("Ha habido problemas al crear el producto. Por favor, inténtalo de nuevo.")
+                    MessagesForUser.setErrorMessage("Ha habido problemas al crear el producto. Por favor, inténtalo de nuevo.");
                     $scope.error = MessagesForUser.getErrorMessage();
                     setTimeout(function () {
                         $scope.$apply(function() {
@@ -48,4 +57,22 @@ angular
                 }
             });
         };
+
+        function uploadImageSuccess() {
+            debugger;
+            MessagesForUser.setSuccessMessage("Producto creado correctamente");
+            $location.path("/productos")
+        }
+
+        function uploadImageError() {
+            debugger;
+            MessagesForUser.setErrorMessage("Ha habido problemas al subir la imagen.");
+            $scope.error = MessagesForUser.getErrorMessage();
+            setTimeout(function () {
+                $scope.$apply(function() {
+                    $scope.error = null;
+                    MessagesForUser.setErrorMessage("");
+                });
+            }, 3000);
+        }
     }]);

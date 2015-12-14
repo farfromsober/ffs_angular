@@ -110,4 +110,41 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
     this.postEditarPerfil = function( producto ) {
         return "";
     };
+
+    this.getSasURL = function( blobName, callback ) {
+        debugger;
+        var client = new WindowsAzure.MobileServiceClient('https://farfromsober.azure-mobile.net/', 'lLNqoTYLjUqktpTxkSvafCrbOsdvvv76'),
+            todoItemTable = client.getTable('todoitem');
+        var params = "?" + blobName + "=web_test&containerName=farfromsober-images-container";
+
+        return client.invokeApi("sas"+params, {
+                body:null,
+                method: "get"
+            })
+            .then(function (results) {
+                debugger;
+                callback(results.result["sasUrl"]) ;
+            }, function(error) {
+                debugger;
+                alert(error.message);
+            });
+    };
+
+    this.uploadImage = function( sasUrl, file, callback ) {
+        debugger;
+        return $http.post(sasUrl, file)
+            .then(
+                function(response) {
+                    /* success */
+                    debugger;
+                    callback(response);
+                },
+                function(response) {
+                    /* error */
+                    debugger;
+                    callback(response);
+                }
+            );
+    };
+
 }]);
