@@ -136,7 +136,7 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
     this.uploadImage = function (sasUrl, file, callback) {
         debugger;
         return $http({
-            method: 'PUT',
+            method: 'POST',
             url: sasUrl,
             headers: {
                 'Authorization': undefined,
@@ -151,10 +151,10 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
                 // in the value '[Object object]' on the server.
                 //formData.append("model", angular.toJson(data.model));
                 //now add all of the assigned files
-                for (var i = 0; i < data.files; i++) {
+                //for (var i = 0; i < data.files; i++) {
                     //add each file to the form data and iteratively name them
                     formData.append("file" + i, data.files[i]);
-                }
+                //}
                 return formData;
             },
             data: {files: file}
