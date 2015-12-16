@@ -23,19 +23,23 @@ angular
                     index: $scope.categoria
                 }
             }
+            debugger;
 
             var file_1 = document.getElementById('product_image_1').files[0];
-            var file_2 = document.getElementById('product_image_2').files[0];
-            var file_3 = document.getElementById('product_image_3').files[0];
-            var file_4 = document.getElementById('product_image_4').files[0];
+            //var image_file = document.getElementById('imageSelector').files[0];
 
-            debugger;
-            var images = [
-                file_1,
-                file_2,
-                file_3,
-                file_4
-            ];
+             /*var azureConfig = {
+             baseUrl: "https://farfromsober.blob.core.windows.net/farfromsober-images-container/subida_angular_prueba",
+             sasToken: "?tv2oqlfCxzFUm7/dYgBGD6YW5K1eQOROVGqqDVm3ijaJpdhxwpkW5OttAFS70++IAcEReSdc0fR/zc06CKrkWQ==",
+             file: file_1,
+             progress:"null",
+             complete:"uploadImageSuccess",
+             error:"uploadImageError",
+             blockSize:"null"
+             }
+
+             azureBlob.upload(azureConfig);*/
+
 
             APIFarFromSobersProvider.postVentaProducto(productObject, function (response) {
                 if (response.status == 201) {

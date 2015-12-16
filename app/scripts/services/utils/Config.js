@@ -13,4 +13,10 @@ angular.module("farfromsober").service("configService", function() {
         return 'http://beta.json-generator.com/api/json/';
     }
 
+    this.azureAppKey = "lLNqoTYLjUqktpTxkSvafCrbOsdvvv76";
+    this.azureEndpoint = "https://farfromsober.azure-mobile.net/";
+    this.azureContainer = "farfromsober-images-container";
+    this.azureSasApi = "sas";
+    this.azureCdnUrl = "http://az834438.vo.msecnd.net/";
+
 });

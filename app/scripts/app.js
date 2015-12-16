@@ -8,10 +8,12 @@ angular
         $httpProvider.defaults.xsrfCookieName = "csrftoken";
         $httpProvider.defaults.xsrfHeaderName = "X-CSRFToken";
 
-        $httpProvider.defaults.headers.common = {};
+        /*$httpProvider.defaults.headers.common = {};
+        $httpProvider.defaults.headers.get = {};
         $httpProvider.defaults.headers.post = {};
         $httpProvider.defaults.headers.put = {};
-        $httpProvider.defaults.headers.patch = {};
+        $httpProvider.defaults.headers.delete = {};
+        $httpProvider.defaults.headers.patch = {};*/
 
         $routeSegmentProvider.when( "/productos", "productos");
 

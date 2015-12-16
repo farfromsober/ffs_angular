@@ -74,14 +74,17 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
     };
 
     this.getLoginUsuario = function(username, password, callback) {
+        debugger;
         var userObject = {
             user : username,
             password : password
         };
         return $http.post(configService.getURLBase() + "login/", userObject)
             .then(function (response) {
+                debugger;
                 callback(response);
             }, function (response) {
+                debugger;
                 callback(response);
             });
     };
@@ -113,11 +116,11 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
 
     this.getSasURL = function( blobName, callback ) {
         debugger;
-        var client = new WindowsAzure.MobileServiceClient('https://farfromsober.azure-mobile.net/', 'lLNqoTYLjUqktpTxkSvafCrbOsdvvv76'),
+        var client = new WindowsAzure.MobileServiceClient(configService.azureEndpoint, configService.azureAppKey),
             todoItemTable = client.getTable('todoitem');
-        var params = "?" + blobName + "=web_test&containerName=farfromsober-images-container";
+        var params = "?" + blobName + "=web_test&containerName=" + configService.azureContainer;
 
-        return client.invokeApi("sas"+params, {
+        return client.invokeApi(configService.azureSasApi + params, {
                 body:null,
                 method: "get"
             })
