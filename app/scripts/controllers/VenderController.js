@@ -4,7 +4,8 @@ angular
 
         $scope.upload = function(file) {
             debugger;
-            APIFarFromSobersProvider.getSasURL("carnet180", function(sasUrl){
+            var fileName = file.name;
+            APIFarFromSobersProvider.getSasURL(file.name, function(sasUrl){
                 APIFarFromSobersProvider.uploadImage(sasUrl, file, function(response) {
 
                 });
@@ -25,7 +26,7 @@ angular
             }
             debugger;
 
-            var file_1 = document.getElementById('product_image_1').files[0];
+            var file_1 = document.getElementById('imageSelector').files[0];
             //var image_file = document.getElementById('imageSelector').files[0];
 
              /*var azureConfig = {

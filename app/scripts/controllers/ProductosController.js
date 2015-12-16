@@ -5,7 +5,7 @@ angular
         $scope.productos = Productos.data;
         $scope.successMessage = MessagesForUser.getSuccessMessage();
         $scope.errorMessage = MessagesForUser.getErrorMessage();
-        debugger;
+        //debugger;
         if ($scope.successMessage != "" && $scope.successMessage != null) {
             $scope.onSuccessMessage = true;
             setTimeout(function () {

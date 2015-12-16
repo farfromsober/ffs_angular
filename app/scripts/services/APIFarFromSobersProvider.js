@@ -118,7 +118,7 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         debugger;
         var client = new WindowsAzure.MobileServiceClient(configService.azureEndpoint, configService.azureAppKey),
             todoItemTable = client.getTable('todoitem');
-        var params = "?" + blobName + "=web_test&containerName=" + configService.azureContainer;
+        var params = "?blobName=" + blobName + "&containerName=" + configService.azureContainer;
 
         return client.invokeApi(configService.azureSasApi + params, {
                 body:null,
@@ -133,21 +133,43 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
             });
     };
 
-    this.uploadImage = function( sasUrl, file, callback ) {
+    this.uploadImage = function (sasUrl, file, callback) {
         debugger;
-        return $http.post(sasUrl, file)
-            .then(
-                function(response) {
-                    /* success */
-                    debugger;
-                    callback(response);
-                },
-                function(response) {
-                    /* error */
-                    debugger;
-                    callback(response);
+        return $http({
+            method: 'PUT',
+            url: sasUrl,
+            headers: {
+                'Authorization': undefined,
+                'Content-Type': undefined,
+                //'Content-Type': 'image/png'
+                //'Content-Type': false
+            },
+            transformRequest: function (data) {
+                var formData = new FormData();
+                //need to convert our json object to a string version of json otherwise
+                // the browser will do a 'toString()' on the object which will result
+                // in the value '[Object object]' on the server.
+                //formData.append("model", angular.toJson(data.model));
+                //now add all of the assigned files
+                for (var i = 0; i < data.files; i++) {
+                    //add each file to the form data and iteratively name them
+                    formData.append("file" + i, data.files[i]);
                 }
-            );
+                return formData;
+            },
+            data: {files: file}
+        })
+        .then(
+            function (response) {
+                /* success */
+                debugger;
+                callback(response);
+            },
+            function (response) {
+                /* error */
+                debugger;
+                callback(response);
+            }
+        );
     };
-
 }]);
