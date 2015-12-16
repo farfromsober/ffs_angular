@@ -135,29 +135,20 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
 
     this.uploadImage = function (sasUrl, file, callback) {
         debugger;
+        var data = new FormData();
+        data.append("file", file);
+
         return $http({
             method: 'PUT',
             url: sasUrl,
             headers: {
                 'Authorization': undefined,
-                'Content-Type': undefined,
+                'Content-Type': file.type,
+                'x-ms-blob-type': 'BlockBlob'
                 //'Content-Type': 'image/png'
                 //'Content-Type': false
             },
-            transformRequest: function (data) {
-                var formData = new FormData();
-                //need to convert our json object to a string version of json otherwise
-                // the browser will do a 'toString()' on the object which will result
-                // in the value '[Object object]' on the server.
-                //formData.append("model", angular.toJson(data.model));
-                //now add all of the assigned files
-                for (var i = 0; i < data.files; i++) {
-                    //add each file to the form data and iteratively name them
-                    formData.append("file" + i, data.files[i]);
-                }
-                return formData;
-            },
-            data: {files: file}
+            data: data
         })
         .then(
             function (response) {
