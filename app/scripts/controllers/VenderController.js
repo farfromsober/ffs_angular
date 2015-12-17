@@ -18,7 +18,6 @@ angular
                     progress:"null",
                     complete:"null",//"uploadImageSuccess",
                     error:"null",//"uploadImageError",
-                    blockSize:"null"
                 }
                 azureBlob.upload(azureConfig);
             });
