@@ -1,14 +1,27 @@
 angular
     .module("farfromsober")
-    .controller("VenderController", ["$scope", "APIFarFromSobersProvider", "$location", "azureBlob", "MessagesForUser", function($scope, APIFarFromSobersProvider, $location, azureBlob, MessagesForUser) {
+    .controller("VenderController", ["$scope", "APIFarFromSobersProvider", "$location", "azureBlob", "MessagesForUser", "$http", function($scope, APIFarFromSobersProvider, $location, azureBlob, MessagesForUser, $http) {
 
         $scope.upload = function(file) {
             debugger;
             var fileName = file.name;
             APIFarFromSobersProvider.getSasURL(file.name, function(sasUrl){
-                APIFarFromSobersProvider.uploadImage(sasUrl, file, function(response) {
-
-                });
+                debugger;
+                var baseUrl = sasUrl;
+                var indexOfQueryStart = baseUrl.indexOf("?");
+                //""http://farfromsober.blob.core.windows.net:80/farfromsober-images-container/test_image_02.png?se=2015-12-17T00%3A17%3A29Z&sr=b&sp=rw&sig=YpbIOIfBqGRi9Af5dpjvjoBiuj9e3r2GTJqBYLH%2B%2Buc%3D""
+                var azureConfig = {
+                    baseUrl: "http://farfromsober.blob.core.windows.net:80/farfromsober-images-container/test_image_02.png",  //baseUrl.substring(0, indexOfQueryStart),
+                    sasToken: "?se=2015-12-17T00%3A17%3A29Z&sr=b&sp=rw&sig=YpbIOIfBqGRi9Af5dpjvjoBiuj9e3r2GTJqBYLH%2B%2Buc%3D",  //baseUrl.substring(indexOfQueryStart),
+                    file: file,
+                    progress:"null",
+                    complete:"uploadImageSuccess",
+                    error:"uploadImageError",
+                    blockSize:"null"
+                }
+                debugger;
+                //$http.defaults.headers.common.Authorization = 'undefined';
+                azureBlob.upload(azureConfig);
             });
         };
 

@@ -25,9 +25,10 @@
         } */
         var upload = function (config) {
             var state = initializeState(config);
-
+            debugger;
             var reader = new FileReader();
             reader.onloadend = function (evt) {
+                debugger;
                 if (evt.target.readyState == FileReader.DONE && !state.cancelled) { // DONE == 2
                     var uri = state.fileUrl + '&comp=block&blockid=' + state.blockIds[state.blockIds.length - 1];
                     var requestData = new Uint8Array(evt.target.result);
@@ -39,7 +40,14 @@
                                 'x-ms-blob-type': 'BlockBlob',
                                 'Content-Type': state.file.type,
                             },
-                            transformRequest: [],
+                            transformRequest: function(status, headersGetter) {
+                                debugger;
+                                var headers = headersGetter();
+
+                                delete headers['Authorization'];
+
+                                return headers;
+                            },
                         }).success(function (data, status, headers, config) {
                             $log.log(data);
                             $log.log(status);
@@ -51,6 +59,7 @@
                             uploadFileInBlocks(reader, state);
                         })
                         .error(function (data, status, headers, config) {
+                            debugger;
                             $log.log(data);
                             $log.log(status);
 
@@ -90,7 +99,7 @@
             }
 
             $log.log("total blocks = " + numberOfBlocks);
-
+            debugger;
             return {
                 maxBlockSize: maxBlockSize, //Each file will be split in 256 KB.
                 numberOfBlocks: numberOfBlocks,
@@ -112,6 +121,7 @@
         };
 
         var uploadFileInBlocks = function (reader, state) {
+            debugger;
             if (!state.cancelled) {
                 if (state.totalBytesRemaining > 0) {
                     $log.log("current file pointer = " + state.currentFilePointer + " bytes read = " + state.maxBlockSize);
@@ -149,13 +159,16 @@
             {
                 headers: {
                     'x-ms-blob-content-type': state.file.type,
+                    'Authorization': 'undefined',
                 }
             }).success(function (data, status, headers, config) {
+                debugger;
                 $log.log(data);
                 $log.log(status);
                 if (state.complete) state.complete(data, status, headers, config);
             })
             .error(function (data, status, headers, config) {
+                debugger;
                 $log.log(data);
                 $log.log(status);
                 if (state.error) state.error(data, status, headers, config);
