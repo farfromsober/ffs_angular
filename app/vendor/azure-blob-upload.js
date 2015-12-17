@@ -12,7 +12,7 @@
 
     function azureBlob(console, $http) {
 
-        var DefaultBlockSize = 1024 * 32 // Default to 32KB
+        var DefaultBlockSize = 1024 * 256 // Default to 32KB
 
         /* config: {
           baseUrl: // baseUrl for blob file uri (i.e. http://<accountName>.blob.core.windows.net/<container>/<blobname>),
@@ -36,27 +36,57 @@
                     var sig = config.sasToken.substring(indexOfSig+4);
                     var signature = "SharedKey farfromsober:"+sig;
                     console.log("signature: "+signature);
-                    var dateTime = new Date().toGMTString().replace('UTC', 'GMT');
+                    var dateTime = new Date().toUTCString();
                     console.log("x-ms-date: "+dateTime);
                     console.log(uri);
-                    $http.put(uri, requestData,
+                    $http({
+                        method: 'PUT',
+                        url: uri,
+                        headers: {
+                            'x-ms-version': '2015-04-05',
+                            'Authorization': undefined,
+                            'Content-Type': undefined,
+                            //'Content-Type': 'image/png'
+                            //'Content-Type': false
+                        },
+                        data: requestData//{files: config.file}
+                    })
+                        .then(
+                            function (data, status, headers, config) {
+                                /* success */
+                                console.log(data);
+                                console.log(status);
+                                state.bytesUploaded += requestData.length;
+
+                                var percentComplete = ((parseFloat(state.bytesUploaded) / parseFloat(state.file.size)) * 100).toFixed(2);
+                                //if (state.progress) state.progress(percentComplete, data, status, headers, config);
+
+                                uploadFileInBlocks(reader, state);
+                            },
+                            function (response) {
+                                /* error */
+                                debugger;
+                                callback(response);
+                            }
+                        );
+                    /*$http.put(uri, requestData,
                         {
                             headers: {
                                 'x-ms-blob-type': 'BlockBlob',
                                 'Content-Type': state.file.type,
                                 //'Content-Length': requestData.length,
-                                //'Authorization': signature,
+                                'Authorization': signature,
                                 'x-ms-version': '2015-04-05',
                                 'x-ms-date': dateTime,
                             },
-                            /*transformRequest: function(status, headersGetter) {
+                            transformRequest: function(status, headersGetter) {
                                 debugger;
                                 var headers = headersGetter();
 
                                 delete headers['Authorization'];
 
                                 return headers;
-                            },*/
+                            },
                         }).success(function (data, status, headers, config) {
                             console.log(data);
                             console.log(status);
@@ -73,7 +103,7 @@
                             console.log(status);
 
                             if (state.error) state.error(data, status, headers, config);
-                        });
+                        });*/
                 }
             };
 
@@ -130,7 +160,6 @@
         };
 
         var uploadFileInBlocks = function (reader, state) {
-            debugger;
             if (!state.cancelled) {
                 if (state.totalBytesRemaining > 0) {
                     console.log("current file pointer = " + state.currentFilePointer + " bytes read = " + state.maxBlockSize);
@@ -167,22 +196,22 @@
             $http.put(uri, requestBody,
             {
                 headers: {
-                    'x-ms-blob-type': 'BlockBlob',
-                    'x-ms-blob-content-type': state.file.type,
-                    'Authorization': 'SharedKey farfromsober:8xtyaIVITAVGgeMDecUGvcO1iKxljoumMy99LogjgEk%3D',
-                    'x-ms-date': '2015-12-17T14:36:57.9340460Z',
+                    //'x-ms-blob-type': 'BlockBlob',
+                    'x-ms-version': '2015-04-05',
+                    'Authorization': undefined,
+                    'Content-Type': undefined,
                 }
             }).success(function (data, status, headers, config) {
                 debugger;
                 console.log(data);
                 console.log(status);
-                if (state.complete) state.complete(data, status, headers, config);
+                //if (state.complete) state.complete(data, status, headers, config);
             })
             .error(function (data, status, headers, config) {
                 debugger;
                 console.log(data);
                 console.log(status);
-                if (state.error) state.error(data, status, headers, config);
+                //if (state.error) state.error(data, status, headers, config);
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
