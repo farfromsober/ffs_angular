@@ -115,9 +115,8 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
     };
 
     this.getSasURL = function( blobName, callback ) {
-        debugger;
         var client = new WindowsAzure.MobileServiceClient(configService.azureEndpoint, configService.azureAppKey),
-            todoItemTable = client.getTable('todoitem');
+            todoItemTable = client.getTable('farfromsober');
         var params = "?blobName=" + blobName + "&containerName=" + configService.azureContainer;
 
         return client.invokeApi(configService.azureSasApi + params, {

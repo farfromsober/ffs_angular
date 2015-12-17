@@ -10,7 +10,7 @@
     azureBlobUpload.factory('azureBlob',
         ['$log', '$http', azureBlob]);
 
-    function azureBlob($log, $http) {
+    function azureBlob(console, $http) {
 
         var DefaultBlockSize = 1024 * 32 // Default to 32KB
 
@@ -25,32 +25,41 @@
         } */
         var upload = function (config) {
             var state = initializeState(config);
-            debugger;
+            //debugger;
             var reader = new FileReader();
             reader.onloadend = function (evt) {
                 debugger;
                 if (evt.target.readyState == FileReader.DONE && !state.cancelled) { // DONE == 2
                     var uri = state.fileUrl + '&comp=block&blockid=' + state.blockIds[state.blockIds.length - 1];
                     var requestData = new Uint8Array(evt.target.result);
-
-                    $log.log(uri);
+                    var indexOfSig = config.sasToken.indexOf("sig=");
+                    var sig = config.sasToken.substring(indexOfSig+4);
+                    var signature = "SharedKey farfromsober:"+sig;
+                    console.log("signature: "+signature);
+                    var dateTime = new Date().toGMTString().replace('UTC', 'GMT');
+                    console.log("x-ms-date: "+dateTime);
+                    console.log(uri);
                     $http.put(uri, requestData,
                         {
                             headers: {
                                 'x-ms-blob-type': 'BlockBlob',
                                 'Content-Type': state.file.type,
+                                //'Content-Length': requestData.length,
+                                //'Authorization': signature,
+                                'x-ms-version': '2015-04-05',
+                                'x-ms-date': dateTime,
                             },
-                            transformRequest: function(status, headersGetter) {
+                            /*transformRequest: function(status, headersGetter) {
                                 debugger;
                                 var headers = headersGetter();
 
                                 delete headers['Authorization'];
 
                                 return headers;
-                            },
+                            },*/
                         }).success(function (data, status, headers, config) {
-                            $log.log(data);
-                            $log.log(status);
+                            console.log(data);
+                            console.log(status);
                             state.bytesUploaded += requestData.length;
 
                             var percentComplete = ((parseFloat(state.bytesUploaded) / parseFloat(state.file.size)) * 100).toFixed(2);
@@ -60,8 +69,8 @@
                         })
                         .error(function (data, status, headers, config) {
                             debugger;
-                            $log.log(data);
-                            $log.log(status);
+                            console.log(data);
+                            console.log(status);
 
                             if (state.error) state.error(data, status, headers, config);
                         });
@@ -89,7 +98,7 @@
             var fileSize = file.size;
             if (fileSize < blockSize) {
                 maxBlockSize = fileSize;
-                $log.log("max block size = " + maxBlockSize);
+                console.log("max block size = " + maxBlockSize);
             }
 
             if (fileSize % maxBlockSize == 0) {
@@ -98,7 +107,7 @@
                 numberOfBlocks = parseInt(fileSize / maxBlockSize, 10) + 1;
             }
 
-            $log.log("total blocks = " + numberOfBlocks);
+            console.log("total blocks = " + numberOfBlocks);
             debugger;
             return {
                 maxBlockSize: maxBlockSize, //Each file will be split in 256 KB.
@@ -124,11 +133,11 @@
             debugger;
             if (!state.cancelled) {
                 if (state.totalBytesRemaining > 0) {
-                    $log.log("current file pointer = " + state.currentFilePointer + " bytes read = " + state.maxBlockSize);
+                    console.log("current file pointer = " + state.currentFilePointer + " bytes read = " + state.maxBlockSize);
 
                     var fileContent = state.file.slice(state.currentFilePointer, state.currentFilePointer + state.maxBlockSize);
                     var blockId = state.blockIdPrefix + pad(state.blockIds.length, 6);
-                    $log.log("block id = " + blockId);
+                    console.log("block id = " + blockId);
 
                     state.blockIds.push(btoa(blockId));
                     reader.readAsArrayBuffer(fileContent);
@@ -146,31 +155,33 @@
 
         var commitBlockList = function (state) {
             var uri = state.fileUrl + '&comp=blocklist';
-            $log.log(uri);
+            console.log(uri);
 
             var requestBody = '<?xml version="1.0" encoding="utf-8"?><BlockList>';
             for (var i = 0; i < state.blockIds.length; i++) {
                 requestBody += '<Latest>' + state.blockIds[i] + '</Latest>';
             }
             requestBody += '</BlockList>';
-            $log.log(requestBody);
-
+            console.log(requestBody);
+            debugger;
             $http.put(uri, requestBody,
             {
                 headers: {
+                    'x-ms-blob-type': 'BlockBlob',
                     'x-ms-blob-content-type': state.file.type,
-                    'Authorization': 'undefined',
+                    'Authorization': 'SharedKey farfromsober:8xtyaIVITAVGgeMDecUGvcO1iKxljoumMy99LogjgEk%3D',
+                    'x-ms-date': '2015-12-17T14:36:57.9340460Z',
                 }
             }).success(function (data, status, headers, config) {
                 debugger;
-                $log.log(data);
-                $log.log(status);
+                console.log(data);
+                console.log(status);
                 if (state.complete) state.complete(data, status, headers, config);
             })
             .error(function (data, status, headers, config) {
                 debugger;
-                $log.log(data);
-                $log.log(status);
+                console.log(data);
+                console.log(status);
                 if (state.error) state.error(data, status, headers, config);
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
