@@ -107,15 +107,16 @@
                 numberOfBlocks = parseInt(fileSize / maxBlockSize, 10) + 1;
             }
             console.log("total blocks = " + numberOfBlocks);
-
-            getSasURL($("#fileName").text(selectedFile.name), function(sasUrl){
+            var imageName = selectedFile.name;
+            console.log("imageName: "+imageName);
+            getSasURL(selectedFile.name, function(sasUrl){
                 debugger;
                 console.log(sasUrl);
-                finalSasUrl = sasUrl;
-                $("#sasUrl").val(finalSasUrl);
-                var baseUrl = $("#sasUrl").val();
+                $("#sasUrl").val(sasUrl);
+                var baseUrl = sasUrl;
+                debugger;
                 var indexOfQueryStart = baseUrl.indexOf("?");
-                submitUri = baseUrl.substring(0, indexOfQueryStart) + '/' + selectedFile.name + baseUrl.substring(indexOfQueryStart);
+                submitUri = baseUrl.substring(0, indexOfQueryStart) + baseUrl.substring(indexOfQueryStart);
                 console.log(submitUri);
             });
         }
@@ -124,24 +125,18 @@
 
         reader.onloadend = function (evt) {
             if (evt.target.readyState == FileReader.DONE) { // DONE == 2
-                var uri = finalSasUrl + submitUri + '&comp=block&blockid=' + blockIds[blockIds.length - 1];
+                var uri = submitUri + '&comp=block&blockid=' + blockIds[blockIds.length - 1];
                 var requestData = new Uint8Array(evt.target.result);
                 $.ajax({
                     url: uri,
                     type: "PUT",
                     data: requestData,
                     processData: false,
-                    beforeSend: function (request)
-                    {
-                        request.setRequestHeader("Authorization", undefined);
+                    headers: {
+                        'x-ms-version': '2015-04-05',
+                        'Authorization': undefined,
+                        'Content-Type': undefined,
                     },
-                    /*beforeSend: function(xhr) {
-                        //xhr.setRequestHeader('x-ms-blob-type', 'BlockBlob');
-                        xhr.setRequestHeader('x-ms-version', '2015-04-05');
-                        //xhr.setRequestHeader('Authorization', 'undefined');
-                        xhr.setRequestHeader('Content-Type', 'undefined');
-                        //xhr.setRequestHeader('Content-Length', requestData.length);
-                    },*/
                     success: function (data, status) {
                         console.log(data);
                         console.log(status);
@@ -195,16 +190,7 @@
                     'x-ms-version': '2015-04-05',
                     'Authorization': undefined,
                     'Content-Type': undefined,
-                    //'Content-Type': 'image/png'
-                    //'Content-Type': false
                 },
-                /*beforeSend: function (xhr) {
-                    xhr.setRequestHeader('x-ms-blob-type', 'BlockBlob');
-                    xhr.setRequestHeader('x-ms-version', '2015-04-05');
-                    xhr.setRequestHeader('Authorization', 'undefined');
-                    xhr.setRequestHeader('Content-Type', 'undefined');
-                    xhr.setRequestHeader('Content-Length', requestBody.length);
-                },*/
                 success: function (data, status) {
                     console.log(data);
                     console.log(status);
