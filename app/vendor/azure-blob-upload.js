@@ -31,7 +31,33 @@
                     var uri = state.fileUrl + '&comp=block&blockid=' + state.blockIds[state.blockIds.length - 1];
                     var requestData = new Uint8Array(evt.target.result);
                     console.log(uri);
-                    $http.put(uri, requestData,
+                    $.ajax({
+                        url: uri,
+                        type: "PUT",
+                        data: requestData,
+                        processData: false,
+                        headers: {
+                            'x-ms-version': '2015-04-05',
+                            'Authorization': undefined,
+                            'Content-Type': undefined,
+                        },
+                        success: function (data, status, headers, config) {
+                            console.log(data);
+                            console.log(status);
+                            state.bytesUploaded += requestData.length;
+
+                            var percentComplete = ((parseFloat(state.bytesUploaded) / parseFloat(state.file.size)) * 100).toFixed(2);
+                            //if (state.progress) state.progress(percentComplete, data, status, headers, config);
+
+                            uploadFileInBlocks(reader, state);
+                        },
+                        error: function(data, status, headers, config) {
+                            debugger;
+                            console.log(data);
+                            console.log(status);
+                        }
+                    });
+                    /*$http.put(uri, requestData,
                         {
                             headers: {
                                 'x-ms-version': '2015-04-05',
@@ -55,6 +81,7 @@
 
                             //if (state.error) state.error(data, status, headers, config);
                         });
+                        */
                 }
             };
 
