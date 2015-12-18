@@ -144,7 +144,14 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
             headers: {
                 'Authorization': undefined,
                 'Content-Type': file.type,
-                'x-ms-blob-type': 'BlockBlob'
+                'x-ms-blob-content-type': file.type,
+                'x-ms-blob-type': 'BlockBlob',
+                'x-ms-version': '2015-04-05',
+                'x-ms-date': new Date()
+
+                //'Content-Encoding': 'deflate',
+                //'x-ms-blob-content-encoding': 'deflate',
+                //'Content-Length': file.size
                 //'Content-Type': 'image/png'
                 //'Content-Type': false
             },
