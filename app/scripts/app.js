@@ -118,8 +118,10 @@ angular
         $routeSegmentProvider.when( "/login", "login");
 
         $routeSegmentProvider.segment("login", {
-            controller: "LoginController",
-            templateUrl: "views/Login.html",
+            //controller: "LoginController",
+            //templateUrl: "views/Login.html",
+            controller: "UploadTestController",
+            templateUrl: "views/UploadTest.html",
             resolve: {}
         });
 
@@ -144,6 +146,14 @@ angular
         $routeSegmentProvider.segment("vender", {
             controller: "VenderController",
             templateUrl: "views/Vender.html",
+            resolve: {}
+        });
+
+        $routeSegmentProvider.when( "/uploadtest", "uploadtest");
+
+        $routeSegmentProvider.segment("uploadtest", {
+            controller: "UploadTestController",
+            templateUrl: "views/UploadTest.html",
             resolve: {}
         });
 

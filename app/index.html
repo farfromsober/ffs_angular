@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="styles/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/css/style.css">
 
+    <script src="vendor/jquery-1.7.1.js"></script>
     <script src="vendor/angular.min.js"></script>
     <script src="vendor/angular-route.min.js"></script>
     <script src="vendor/angular-route-segment.min.js"></script>
@@ -40,11 +41,221 @@
     <script src="scripts/services/AuthService.js"></script>
     <script src="scripts/services/MessagesForUser.js"></script>
     <script src="scripts/directives/imageSelector.js"></script>
+    <script>
+        var maxBlockSize = 256 * 1024;//Each file will be split in 256 KB.
+        var numberOfBlocks = 1;
+        var selectedFile = null;
+        var currentFilePointer = 0;
+        var totalBytesRemaining = 0;
+        var blockIds = new Array();
+        var blockIdPrefix = "block-";
+        var submitUri = null;
+        var bytesUploaded = 0;
+        var finalSasUrl="";
+
+        $(document).ready(function () {
+            $("#output").hide();
+            $("#file").bind('change', handleFileSelect);
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+                // Great success! All the File APIs are supported.
+            } else {
+                alert('The File APIs are not fully supported in this browser.');
+            }
+        });
+
+        function getSasURL( blobName, callback ) {
+            var azureAppKey = "lLNqoTYLjUqktpTxkSvafCrbOsdvvv76";
+            var azureEndpoint = "https://farfromsober.azure-mobile.net/";
+            var azureContainer = "farfromsober-images-container";
+            var azureSasApi = "sas";
+            var azureCdnUrl = "http://az834438.vo.msecnd.net/";
+            var client = new WindowsAzure.MobileServiceClient(azureEndpoint, azureAppKey),
+                    todoItemTable = client.getTable('farfromsober');
+            var params = "?blobName=" + blobName + "&containerName=" + azureContainer;
+
+            return client.invokeApi(azureSasApi + params, {
+                        body:null,
+                        method: "get"
+                    })
+                    .then(function (results) {
+                        callback(results.result["sasUrl"]) ;
+                    }, function(error) {
+                        alert(error.message);
+                    });
+        };
+
+        //Read the file and find out how many blocks we would need to split it.
+        function handleFileSelect(e) {
+            maxBlockSize = 256 * 1024;
+            currentFilePointer = 0;
+            totalBytesRemaining = 0;
+            var files = e.target.files;
+            selectedFile = files[0];
+            $("#output").show();
+            $("#fileName").text(selectedFile.name);
+            $("#fileSize").text(selectedFile.size);
+            $("#fileType").text(selectedFile.type);
+            var fileSize = selectedFile.size;
+            if (fileSize < maxBlockSize) {
+                maxBlockSize = fileSize;
+                console.log("max block size = " + maxBlockSize);
+            }
+            totalBytesRemaining = fileSize;
+            if (fileSize % maxBlockSize == 0) {
+                numberOfBlocks = fileSize / maxBlockSize;
+            } else {
+                numberOfBlocks = parseInt(fileSize / maxBlockSize, 10) + 1;
+            }
+            console.log("total blocks = " + numberOfBlocks);
+            var imageName = selectedFile.name;
+            console.log("imageName: "+imageName);
+            getSasURL(selectedFile.name, function(sasUrl){
+                debugger;
+                console.log(sasUrl);
+                $("#sasUrl").val(sasUrl);
+                var baseUrl = sasUrl;
+                debugger;
+                var indexOfQueryStart = baseUrl.indexOf("?");
+                submitUri = baseUrl.substring(0, indexOfQueryStart) + baseUrl.substring(indexOfQueryStart);
+                console.log(submitUri);
+            });
+        }
+
+        var reader = new FileReader();
+
+        reader.onloadend = function (evt) {
+            if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+                var uri = submitUri + '&comp=block&blockid=' + blockIds[blockIds.length - 1];
+                var requestData = new Uint8Array(evt.target.result);
+                $.ajax({
+                    url: uri,
+                    type: "PUT",
+                    data: requestData,
+                    processData: false,
+                    headers: {
+                        'x-ms-version': '2015-04-05',
+                        'Authorization': undefined,
+                        'Content-Type': undefined,
+                    },
+                    success: function (data, status) {
+                        console.log(data);
+                        console.log(status);
+                        bytesUploaded += requestData.length;
+                        var percentComplete = ((parseFloat(bytesUploaded) / parseFloat(selectedFile.size)) * 100).toFixed(2);
+                        $("#fileUploadProgress").text(percentComplete + " %");
+                        uploadFileInBlocks();
+                    },
+                    error: function(xhr, desc, err) {
+                        debugger;
+                        console.log(desc);
+                        console.log(err);
+                    }
+                });
+            }
+        };
+
+        function uploadFileInBlocks() {
+            if (totalBytesRemaining > 0) {
+                console.log("current file pointer = " + currentFilePointer + " bytes read = " + maxBlockSize);
+                var fileContent = selectedFile.slice(currentFilePointer, currentFilePointer + maxBlockSize);
+                var blockId = blockIdPrefix + pad(blockIds.length, 6);
+                console.log("block id = " + blockId);
+                blockIds.push(btoa(blockId));
+                reader.readAsArrayBuffer(fileContent);
+                currentFilePointer += maxBlockSize;
+                totalBytesRemaining -= maxBlockSize;
+                if (totalBytesRemaining < maxBlockSize) {
+                    maxBlockSize = totalBytesRemaining;
+                }
+            } else {
+                commitBlockList();
+            }
+        }
+
+        function commitBlockList() {
+            debugger;
+            var uri = submitUri + '&comp=blocklist';
+            console.log(uri);
+            var requestBody = '<?xml version="1.0" encoding="utf-8"?><BlockList>';
+            for (var i = 0; i < blockIds.length; i++) {
+                requestBody += '<Latest>' + blockIds[i] + '</Latest>';
+            }
+            requestBody += '</BlockList>';
+            console.log(requestBody);
+            $.ajax({
+                url: uri,
+                type: "PUT",
+                data: requestBody,
+                headers: {
+                    'x-ms-version': '2015-04-05',
+                    'Authorization': undefined,
+                    'Content-Type': undefined,
+                },
+                success: function (data, status) {
+                    console.log(data);
+                    console.log(status);
+                },
+                error: function (xhr, desc, err) {
+                    debugger;
+                    console.log(desc);
+                    console.log(err);
+                }
+            });
+
+        }
+        function pad(number, length) {
+            var str = '' + number;
+            while (str.length < length) {
+                str = '0' + str;
+            }
+            return str;
+        }
+    </script>
 </head>
 <body>
-    <navbar-directive></navbar-directive>
+<form>
+    <div style="margin-left: 20px;">
+        <h1>File Uploader</h1>
+        <p>
+            <strong>SAS URI</strong>:
+            <br/>
+                <span class="input-control text">
+                    <input type="text" id="sasUrl" style="width: 50%"
+                           value=""/>
+                </span>
+        </p>
+        <p>
+            <strong>File To Upload</strong>:
+            <br/>
+                <span class="input-control text">
+                    <input type="file" id="file" name="file" style="width: 50%"/>
+                </span>
+        </p>
+        <div id="output">
 
-    <section class="body" app-view-segment="0" ng-controller="SectionController"></section>
+            <strong>File Properties:</strong>
+            <br/>
+            <p>
+                Name: <span id="fileName"></span>
+            </p>
+            <p>
+                File Size: <span id="fileSize"></span> bytes.
+            </p>
+            <p>
+                File Type: <span id="fileType"></span>
+            </p>
+            <p>
+                <input type="button" value="Upload File" onclick="uploadFileInBlocks()"/>
+            </p>
+            <p>
+                <strong>Progress</strong>: <span id="fileUploadProgress">0.00 %</span>
+            </p>
+        </div>
+    </div>
+    <div>
+    </div>
+</form>
+
 
 </body>
 </html>

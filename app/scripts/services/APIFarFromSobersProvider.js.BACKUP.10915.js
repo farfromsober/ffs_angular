@@ -135,15 +135,29 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
 
     this.uploadImage = function (sasUrl, file, callback) {
         debugger;
+        var data = new FormData();
+        data.append("file", file);
+
         return $http({
             method: 'POST',
             url: sasUrl,
             headers: {
                 'Authorization': undefined,
-                'Content-Type': undefined,
+                'Content-Type': file.type,
+                'x-ms-blob-content-type': file.type,
+                'x-ms-blob-type': 'BlockBlob',
+                'x-ms-version': '2015-04-05',
+                'x-ms-date': new Date()
+
+                //'Content-Encoding': 'deflate',
+                //'x-ms-blob-content-encoding': 'deflate',
+                //'Content-Length': file.size
                 //'Content-Type': 'image/png'
                 //'Content-Type': false
             },
+<<<<<<< HEAD
+            data: data
+=======
             transformRequest: function (data) {
                 var formData = new FormData();
                 //need to convert our json object to a string version of json otherwise
@@ -158,6 +172,7 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
                 return formData;
             },
             data: {files: file}
+>>>>>>> e781efefa1dfa60fa6fb0a350114872ce2275a38
         })
         .then(
             function (response) {
