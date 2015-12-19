@@ -1,9 +1,38 @@
 angular
     .module("farfromsober")
-    .controller("VenderController", ["$scope", "APIFarFromSobersProvider", "$location", "azureBlob", "MessagesForUser", "$http", function($scope, APIFarFromSobersProvider, $location, azureBlob, MessagesForUser, $http) {
+    .controller("VenderController", ["$scope", "APIFarFromSobersProvider", "$location", "azureBlob", "MessagesForUser", "$rootScope", "randomString", function($scope, APIFarFromSobersProvider, $location, azureBlob, MessagesForUser, $rootScope, randomString) {
 
-        $scope.upload = function(file) {
-            APIFarFromSobersProvider.getSasURL(file.name, function(sasUrl){
+        var fileNames = [null, null, null, null];
+        var files = [null, null, null, null];
+        var uploadedFileIndexes = [];
+
+        $scope.selectImage = function(file, fileId) {
+            var userId = $rootScope.user.id;
+            var imageIndex = fileId;
+            var random = randomString(15);
+            var fileName = userId + "-" + imageIndex + "-" + random;
+
+            fileNames[imageIndex] = fileName;
+            files[imageIndex] = file;
+            //debugger;
+        }
+
+
+        $scope.submit = function () {
+            angular.forEach(files, function(value, index) {
+                //debugger;
+                if (value) {
+                    uploadImage(value, fileNames[index]);
+                }
+            });
+
+        };
+
+
+
+        function uploadImage(file, fileName) {
+            //debugger;
+            APIFarFromSobersProvider.getSasURL(fileName, function(sasUrl){
                 //debugger;
                 var indexOfQueryStart = sasUrl.indexOf("?");
                 var baseUrl = sasUrl.substring(0, indexOfQueryStart);
@@ -15,15 +44,42 @@ angular
                     baseUrl: baseUrl,
                     sasToken: sasToken,
                     file: file,
-                    progress:"null",
-                    complete:"null",//"uploadImageSuccess",
-                    error:"null",//"uploadImageError",
+                    progress: function uploadProgress(percentComplete, data, status, headers, config) {
+                        console.log("percentComplete = " + percentComplete);
+                    },
+                    complete: function uploadImageSuccess(data, status, headers, config) {
+                        debugger;
+                        var fileName = config.url.substr(config.url.lastIndexOf('/') + 1);
+                        var fileIndex = fileName.split("-")[1];
+                        if (uploadedFileIndexes.indexOf(fileIndex) == -1) {
+                            uploadedFileIndexes.push(fileIndex);
+                        }
+                        if (uploadedFileIndexes.size == files.size) {
+                            debugger;
+                            uploadProduct();
+                        }
+                        MessagesForUser.setSuccessMessage("Producto creado correctamente");
+                        $location.path("/productos")
+                    },
+                    error: function uploadImageSuccess(data, status, headers, config) {
+                        debugger;
+                        var fileName = config.url.substr(config.url.lastIndexOf('/') + 1);
+                        var fileIndex = fileName.split("-")[1];
+                        MessagesForUser.setErrorMessage("Ha habido problemas al subir la imagen numero " + fileIndex);
+                        $scope.error = MessagesForUser.getErrorMessage();
+                        setTimeout(function () {
+                            $scope.$apply(function() {
+                                $scope.error = null;
+                                MessagesForUser.setErrorMessage("");
+                            });
+                        }, 3000);
+                    },
                 }
                 azureBlob.upload(azureConfig);
             });
         };
 
-        $scope.submit = function () {
+        function uploadProduct() {
             $scope.dataLoading = true;
 
             // Creamos el objeto producto que enviaremos con la llamada a la API.
@@ -37,13 +93,10 @@ angular
             }
             debugger;
 
-
             APIFarFromSobersProvider.postVentaProducto(productObject, function (response) {
                 if (response.status == 201) {
                     debugger;
                     console.log(response);
-
-
                 } else {
                     debugger;
                     MessagesForUser.setErrorMessage("Ha habido problemas al crear el producto. Por favor, inténtalo de nuevo.");
@@ -57,23 +110,5 @@ angular
                     $scope.dataLoading = false;
                 }
             });
-        };
-
-        function uploadImageSuccess() {
-            debugger;
-            MessagesForUser.setSuccessMessage("Producto creado correctamente");
-            $location.path("/productos")
-        }
-
-        function uploadImageError() {
-            debugger;
-            MessagesForUser.setErrorMessage("Ha habido problemas al subir la imagen.");
-            $scope.error = MessagesForUser.getErrorMessage();
-            setTimeout(function () {
-                $scope.$apply(function() {
-                    $scope.error = null;
-                    MessagesForUser.setErrorMessage("");
-                });
-            }, 3000);
         }
     }]);

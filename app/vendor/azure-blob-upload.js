@@ -47,7 +47,7 @@
                             state.bytesUploaded += requestData.length;
 
                             var percentComplete = ((parseFloat(state.bytesUploaded) / parseFloat(state.file.size)) * 100).toFixed(2);
-                            //if (state.progress) state.progress(percentComplete, data, status, headers, config);
+                            if (state.progress) state.progress(percentComplete, data, status, headers, config);
 
                             uploadFileInBlocks(reader, state);
                         },
@@ -95,7 +95,7 @@
         };
 
         var initializeState = function (config) {
-            debugger;
+            //debugger;
             var blockSize = DefaultBlockSize;
             if (config.blockSize) blockSize = config.blockSize;
 
@@ -131,7 +131,7 @@
                 baseUrl: config.baseUrl,
                 sasToken: config.sasToken,
                 fileUrl: config.baseUrl + config.sasToken,
-                progress: config.progress,
+                progress: null, //config.progress,
                 complete: config.complete,
                 error: config.error,
                 cancelled: false
@@ -180,16 +180,16 @@
                     'Content-Type': undefined,
                 }
             }).success(function (data, status, headers, config) {
-                debugger;
+                //debugger;
                 console.log(data);
                 console.log(status);
-                //if (state.complete) state.complete(data, status, headers, config);
+                if (state.complete) state.complete(data, status, headers, config);
             })
             .error(function (data, status, headers, config) {
                 debugger;
                 console.log(data);
                 console.log(status);
-                //if (state.error) state.error(data, status, headers, config);
+                if (state.error) state.error(data, status, headers, config);
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });

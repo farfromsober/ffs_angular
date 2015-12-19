@@ -124,14 +124,14 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
                 method: "get"
             })
             .then(function (results) {
-                debugger;
+                //debugger;
                 callback(results.result["sasUrl"]) ;
             }, function(error) {
-                debugger;
+                //debugger;
                 alert(error.message);
             });
     };
-
+/*
     this.uploadImage = function (sasUrl, file, callback) {
         debugger;
         return $http({
@@ -160,15 +160,15 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         })
         .then(
             function (response) {
-                /* success */
+                /!* success *!/
                 debugger;
                 callback(response);
             },
             function (response) {
-                /* error */
+                /!* error *!/
                 debugger;
                 callback(response);
             }
         );
-    };
+    };*/
 }]);
