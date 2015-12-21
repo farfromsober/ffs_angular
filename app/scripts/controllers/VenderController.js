@@ -1,6 +1,6 @@
 angular
     .module("farfromsober")
-    .controller("VenderController", ["$scope", "APIFarFromSobersProvider", "$location", "azureBlob", "MessagesForUser", "$rootScope", "randomString", function($scope, APIFarFromSobersProvider, $location, azureBlob, MessagesForUser, $rootScope, randomString) {
+    .controller("VenderController", ["$scope", "APIFarFromSobersProvider", "$location", "azureBlob", "MessagesForUser", "$rootScope", "randomString", "configService", function($scope, APIFarFromSobersProvider, $location, azureBlob, MessagesForUser, $rootScope, randomString, configService) {
 
         var fileNames = [null, null, null, null];
         var files = [null, null, null, null];
@@ -54,12 +54,10 @@ angular
                         if (uploadedFileIndexes.indexOf(fileIndex) == -1) {
                             uploadedFileIndexes.push(fileIndex);
                         }
-                        if (uploadedFileIndexes.size == files.size) {
+                        if (uploadedFileIndexes.length == files.filter(function(val) { return val !== null; }).length) {
                             debugger;
                             uploadProduct();
                         }
-                        MessagesForUser.setSuccessMessage("Producto creado correctamente");
-                        $location.path("/productos")
                     },
                     error: function uploadImageSuccess(data, status, headers, config) {
                         debugger;
@@ -97,6 +95,34 @@ angular
                 if (response.status == 201) {
                     debugger;
                     console.log(response);
+                    var urlsArray = [];
+                    angular.forEach(fileNames, function(value, index) {
+                        if (value != null){
+                            urlsArray.push(configService.azureCdnUrl + configService.azureContainer + "/" + value);
+                        }
+                    });
+                    var imagesObject = {
+                        productId: response.data.id,
+                        urls: urlsArray
+                    }
+                    debugger;
+
+                    APIFarFromSobersProvider.postImageProducto(imagesObject, function(response){
+                        console.log(response);
+                        if (response.status == 201) {
+                            MessagesForUser.setSuccessMessage("Producto creado correctamente");
+                            $location.path("/productos")
+                        } else{
+                            MessagesForUser.setErrorMessage("Ha habido problemas al subir las imagenes del producto" + fileIndex);
+                            $scope.error = MessagesForUser.getErrorMessage();
+                            setTimeout(function () {
+                                $scope.$apply(function() {
+                                    $scope.error = null;
+                                    MessagesForUser.setErrorMessage("");
+                                });
+                            }, 3000);
+                        }
+                    });
                 } else {
                     debugger;
                     MessagesForUser.setErrorMessage("Ha habido problemas al crear el producto. Por favor, inténtalo de nuevo.");
