@@ -7,11 +7,12 @@ angular
 
             APIFarFromSobersProvider.getLoginUsuario($scope.username,$scope.password, function (response) {
                 if (response.status == 200) {
-                    debugger;
+                    //debugger;
                     AuthService.SetCredentials($scope.username, $scope.password, response.data);
                     $location.path("/productos")
                 } else {
-                    $scope.error = "El nombre de usuario o el password introducidos son incorrectos"
+                    // TODO: show error alert
+                    /*$scope.error = "El nombre de usuario o el password introducidos son incorrectos"*/
                     $scope.dataLoading = false;
                 }
             });

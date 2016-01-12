@@ -74,14 +74,14 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
     };
 
     this.getLoginUsuario = function(username, password, callback) {
-        debugger;
+        //debugger;
         var userObject = {
             user : username,
             password : password
         };
         return $http.post(configService.getURLBase() + "login/", userObject)
             .then(function (response) {
-                debugger;
+                //debugger;
                 callback(response);
             }, function (response) {
                 debugger;
@@ -100,11 +100,11 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         }
         return $http.post(configService.getURLBase() + "products/", producto, config)
             .then(function (response) {
-                debugger;
+                //debugger;
                 console.log(response);
                 callback(response) ;
             }, function (response) {
-                debugger;
+                //debugger;
                 callback(response) ;
                 console.log(response);
             });
@@ -117,11 +117,11 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         }
         return $http.post(configService.getURLBase() + "images/", images, config)
             .then(function (response) {
-                debugger;
+                //debugger;
                 console.log(response);
                 callback(response) ;
             }, function (response) {
-                debugger;
+                //debugger;
                 callback(response) ;
                 console.log(response);
             });

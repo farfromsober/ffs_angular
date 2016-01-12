@@ -1,4 +1,4 @@
-angular.module("farfromsober", ["ngRoute", "route-segment", "view-segment", "ngCookies", "ui.bootstrap", "azureBlobUpload", "angularRandomString"]);
+angular.module("farfromsober", ["ngRoute", "route-segment", "view-segment", "ngCookies", "ui.bootstrap", "azureBlobUpload", "angularRandomString", "ng-sweet-alert"]);
 
 angular
     .module("farfromsober")
