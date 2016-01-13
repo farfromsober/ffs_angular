@@ -1,4 +1,4 @@
-angular.module("farfromsober", ["ngRoute", "route-segment", "view-segment", "ngCookies", "ui.bootstrap", "azureBlobUpload"]);
+angular.module("farfromsober", ["ngRoute", "route-segment", "view-segment", "ngCookies", "ui.bootstrap", "azureBlobUpload", "angularRandomString", "ng-sweet-alert"]);
 
 angular
     .module("farfromsober")
@@ -7,6 +7,13 @@ angular
         // Configuración del envío del token CSRF al backend en cada llamada http.
         $httpProvider.defaults.xsrfCookieName = "csrftoken";
         $httpProvider.defaults.xsrfHeaderName = "X-CSRFToken";
+
+        /*$httpProvider.defaults.headers.common = {};
+        $httpProvider.defaults.headers.get = {};
+        $httpProvider.defaults.headers.post = {};
+        $httpProvider.defaults.headers.put = {};
+        $httpProvider.defaults.headers.delete = {};
+        $httpProvider.defaults.headers.patch = {};*/
 
         $routeSegmentProvider.when( "/productos", "productos");
 

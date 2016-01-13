@@ -3,7 +3,7 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
     this.getProductos = function() {
         //Utilizamos la caché para obtener los datos ahorrandonos la llamada a la API
         var config = {
-            cache: true//,
+            cache: false//,
         };
         return $http.get(configService.getURLBase() + "products/", config)
             .then(function (response) {
@@ -74,14 +74,17 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
     };
 
     this.getLoginUsuario = function(username, password, callback) {
+        //debugger;
         var userObject = {
             user : username,
             password : password
         };
         return $http.post(configService.getURLBase() + "login/", userObject)
             .then(function (response) {
+                //debugger;
                 callback(response);
             }, function (response) {
+                debugger;
                 callback(response);
             });
     };
@@ -97,11 +100,28 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         }
         return $http.post(configService.getURLBase() + "products/", producto, config)
             .then(function (response) {
-                debugger;
+                //debugger;
                 console.log(response);
                 callback(response) ;
             }, function (response) {
-                debugger;
+                //debugger;
+                callback(response) ;
+                console.log(response);
+            });
+    };
+
+    this.postImageProducto = function( images, callback ) {
+        //Utilizamos la caché para obtener los datos ahorrandonos la llamada a la API
+        var config = {
+            cache: true//,
+        }
+        return $http.post(configService.getURLBase() + "images/", images, config)
+            .then(function (response) {
+                //debugger;
+                console.log(response);
+                callback(response) ;
+            }, function (response) {
+                //debugger;
                 callback(response) ;
                 console.log(response);
             });
@@ -110,4 +130,62 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
     this.postEditarPerfil = function( producto ) {
         return "";
     };
+
+    this.getSasURL = function( blobName, callback ) {
+        var client = new WindowsAzure.MobileServiceClient(configService.azureEndpoint, configService.azureAppKey),
+            todoItemTable = client.getTable('farfromsober');
+        var params = "?blobName=" + blobName + "&containerName=" + configService.azureContainer;
+
+        return client.invokeApi(configService.azureSasApi + params, {
+                body:null,
+                method: "get"
+            })
+            .then(function (results) {
+                //debugger;
+                callback(results.result["sasUrl"]) ;
+            }, function(error) {
+                //debugger;
+                alert(error.message);
+            });
+    };
+/*
+    this.uploadImage = function (sasUrl, file, callback) {
+        debugger;
+        return $http({
+            method: 'PUT',
+            url: sasUrl,
+            headers: {
+                'Authorization': undefined,
+                'Content-Type': undefined,
+                //'Content-Type': 'image/png'
+                //'Content-Type': false
+            },
+            transformRequest: function (data) {
+                var formData = new FormData();
+                //need to convert our json object to a string version of json otherwise
+                // the browser will do a 'toString()' on the object which will result
+                // in the value '[Object object]' on the server.
+                //formData.append("model", angular.toJson(data.model));
+                //now add all of the assigned files
+                for (var i = 0; i < data.files; i++) {
+                    //add each file to the form data and iteratively name them
+                    formData.append("file" + i, data.files[i]);
+                }
+                return formData;
+            },
+            data: {files: file}
+        })
+        .then(
+            function (response) {
+                /!* success *!/
+                debugger;
+                callback(response);
+            },
+            function (response) {
+                /!* error *!/
+                debugger;
+                callback(response);
+            }
+        );
+    };*/
 }]);
