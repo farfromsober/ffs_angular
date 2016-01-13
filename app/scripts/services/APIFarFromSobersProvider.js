@@ -3,7 +3,7 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
     this.getProductos = function() {
         //Utilizamos la caché para obtener los datos ahorrandonos la llamada a la API
         var config = {
-            cache: true//,
+            cache: false//,
         };
         return $http.get(configService.getURLBase() + "products/", config)
             .then(function (response) {

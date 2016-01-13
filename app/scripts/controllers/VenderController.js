@@ -1,7 +1,7 @@
 angular
     .module("farfromsober")
-    .controller("VenderController", ["$scope", "APIFarFromSobersProvider", "$location", "azureBlob", "$rootScope", "randomString", "configService",
-        function($scope, APIFarFromSobersProvider, $location, azureBlob,
+    .controller("VenderController", ["$scope", "APIFarFromSobersProvider", "$location", "$window", "azureBlob", "$rootScope", "randomString", "configService",
+        function($scope, APIFarFromSobersProvider, $location, $window, azureBlob,
                  $rootScope, randomString, configService) {
 
             var fileNames = [null, null, null, null];
@@ -49,20 +49,10 @@ angular
             };
 
 
-            function goToProducts() {
+            function goBackToProducts() {
                 debugger;
-                setTimeout(function() {
-                    $location.path("/productos");
-                    swal({
-                        title: "Error!",
-                        text: "Los datos \"Title\", \"price\" y \"Category\" son obligatorios",
-                        type: "error",
-                        showCancelButton: false,
-                        //confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Ok",
-                        closeOnConfirm: true
-                    });
-                }, 1);
+                $location.path("/productos");
+                $scope.$apply();
             }
 
 
@@ -171,7 +161,7 @@ angular
                                     function (isConfirm) {
                                         if (isConfirm) {
                                             debugger;
-                                            goToProducts();
+                                            goBackToProducts();
                                         }
                                     });
 
