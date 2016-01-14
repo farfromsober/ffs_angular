@@ -53,12 +53,42 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
 
     };
 
+    this.getUserDataById = function( id ) {
+        var config = {
+            cache: false
+        };
+        url = configService.getURLBase() + "users/" + id + "/";
+        return $http.get(url, config).then(function (response) {
+            return response;
+        }, function (response) {
+            return response;
+        });
+    };
+
     this.getPerfilVendidosById = function( id ) {
-        return "";
+        var config = {
+            cache: true
+        };
+        url = configService.getURLBase() + "products/?seller=" + id;
+        url += "&selling=" + 3;
+        return $http.get(url, config).then(function (response) {
+            return response;
+        }, function (response) {
+            return response;
+        });
     };
 
     this.getPerfilEnVentasById = function( id ) {
-        return "";
+        var config = {
+            cache: false
+        };
+        url = configService.getURLBase() + "products/?seller=" + id;
+        url += "&selling=" + 2;
+        return $http.get(url, config).then(function (response) {
+            return response;
+        }, function (response) {
+            return response;
+        });
     };
 
     this.getPerfilBusquedaById = function( id ) {

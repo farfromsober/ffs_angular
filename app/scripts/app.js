@@ -49,7 +49,7 @@ angular
                 }] }
         });
 
-        $routeSegmentProvider.when( "/perfil/:id/vendidos", "vendidos");
+        $routeSegmentProvider.when( "/perfil/:name/:id/vendidos", "vendidos");
 
         $routeSegmentProvider.segment("vendidos", {
             controller: "PerfilVendidosController",
@@ -57,22 +57,29 @@ angular
             resolve: {
                 Vendidos: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
                     return APIFarFromSobersProvider.getPerfilVendidosById($routeParams.id);
-                }] }
+                }],
+                Usuario: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
+                    return APIFarFromSobersProvider.getUserDataById($routeParams.name);
+                }]}
         });
 
-        $routeSegmentProvider.when( "/perfil/:id/ventas", "en_ventas" );
+        $routeSegmentProvider.when( "/perfil/:name/:id/ventas", "en_ventas" );
 
         $routeSegmentProvider.segment( "en_ventas", {
             controller: "PerfilEnVentasController",
             templateUrl: "views/PerfilEnVentas.html",
             resolve: {
-                EnVentas: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams){
-                    return APIFarFromSobersProvider.getPerfilEnVentasById($routeParams.id);
+                Usuario: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
+                    return APIFarFromSobersProvider.getUserDataById($routeParams.id);
+                }],
+                EnVenta: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams){
+                    return APIFarFromSobersProvider.getPerfilEnVentasById($routeParams.name);
                 }]
+
             }
         });
 
-        $routeSegmentProvider.when( "/perfil/:id/busquedas", "busquedas" );
+        $routeSegmentProvider.when( "/perfil/:name/:id/busquedas", "busquedas" );
 
         $routeSegmentProvider.segment( "busquedas", {
             controller: "PerfilBusquedaController",
