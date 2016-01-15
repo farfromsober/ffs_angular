@@ -18,11 +18,20 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         var config = {
             cache: true
         };
-        
+
         //Crear la url con los parametros que nos llegan
-        url = configService.getURLBase() + "products/?category=" + category;
-        url += "&name=" + name;
-        url += "&distance=" + distance;
+        var url = configService.getURLBase() + "products/?category=";
+        if (category){
+            url += category;
+        }
+        url += "&name=";
+        if (name){
+            url += name;
+        }
+        url += "&distance=";
+        if (distance){
+            url += distance;
+        }
 
         return $http.get(url, config);
 
