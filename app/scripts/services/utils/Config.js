@@ -11,7 +11,7 @@ angular.module("farfromsober").service("configService", function() {
 
     this.getFakeURLBase = function () {
         return 'http://beta.json-generator.com/api/json/';
-    }
+    };
 
     this.azureAppKey = "lLNqoTYLjUqktpTxkSvafCrbOsdvvv76";
     this.azureEndpoint = "https://farfromsober.azure-mobile.net/";

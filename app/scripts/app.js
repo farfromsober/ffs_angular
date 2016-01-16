@@ -31,10 +31,11 @@ angular
         $routeSegmentProvider.segment("productosWithParams", {
             controller: "ProductosController",
             templateUrl: "views/Productos.html",
-            dependencies: ["category","name","distance"],
+            dependencies: ["category","name","distance","latitude","longitude"],
             resolve: {
                 Productos: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
-                    return APIFarFromSobersProvider.getProductoWithParam($routeParams.category, $routeParams.name, $routeParams.distance);
+                    return APIFarFromSobersProvider.getProductoWithParam($routeParams.category, $routeParams.name,
+                        $routeParams.distance, $routeParams.latitude, $routeParams.longitude);
                 }] }
         });
 
