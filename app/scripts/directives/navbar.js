@@ -1,6 +1,7 @@
 angular
     .module("farfromsober")
-    .directive("navbarDirective", ["$location", "AuthService", function($location, AuthService) {
+    .directive("navbarDirective", ["$location", "AuthService", "$window", "LocationService",
+        function($location, AuthService, $window, LocationService) {
 
     return {
         templateUrl: "views/templates/Navbar.html",
@@ -20,9 +21,18 @@ angular
                 var category = scope.form.selectCategoria.$viewValue;
                 var distance = scope.form.selectDistancia.$viewValue;
                 if (distance){
-                    var user = JSON.parse(AuthService.GetUser());
-                    latitude = user.latitude;
-                    longitude = user.longitude;
+
+                    // para pasar la localización: primero intentamos pasar la física, si no la del usuario logueado
+                    if ($window.navigator &&
+                        LocationService.getCurrentLatitude() && LocationService.getCurrentLongitude()) {
+                        latitude = LocationService.getCurrentLatitude();
+                        longitude = LocationService.getCurrentLongitude();
+                    } else{
+                        var user = JSON.parse(AuthService.GetUser());
+                        latitude = user.latitude;
+                        longitude = user.longitude;
+                    }
+
                 }
 
                 //Llamamos a la routesegment con los parametros a buscar
