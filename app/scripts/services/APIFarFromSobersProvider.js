@@ -13,17 +13,30 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
             });
     };
 
-    this.getProductoWithParam = function( category, name, distance ) {
+    this.getProductoWithParam = function( category, name, distance, latitude, longitude ) {
 
         var config = {
             cache: true
         };
-        
-        //Crear la url con los parametros que nos llegan
-        url = configService.getURLBase() + "products/?category=" + category;
-        url += "&name=" + name;
-        url += "&distance=" + distance;
 
+        //Crear la url con los parametros que nos llegan
+        var url = configService.getURLBase() + "products/?category=";
+        if (category){
+            url += category;
+        }
+        url += "&name=";
+        if (name){
+            url += name;
+        }
+        url += "&distance=";
+        if (distance && distance != ""){
+            url += distance;
+            // añadimos la localización
+            url += "&latitude=";
+            url += latitude;
+            url += "&longitude=";
+            url += longitude;
+        }
         return $http.get(url, config);
 
     };
