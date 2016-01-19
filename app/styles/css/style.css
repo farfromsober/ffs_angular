@@ -321,3 +321,58 @@ a.btn-circle-lg {
     font-family: "Helvetica Neue";
     background: s;
 }
+
+.profile_data {
+    float:left;
+}
+
+.profile_data .text-small-detail-product{
+    float: left;
+    font-size: 14px;
+    font-family: "Helvetica Neue";
+    margin: 0 0 0 5px;
+    color: #fc7232 !important;
+}
+
+.profile_data .img-avatar-detail-product {
+    width:80px;
+    height:80px;
+}
+
+.profile_table {
+    float:left;
+}
+
+.profile_buttons {
+    float:left;
+    margin:60px 0 0 0;
+}
+
+.profile_buttons a {
+    float:left;
+    padding:10px;
+    margin:0 0 20px 20px;
+    width:280px;
+    color:#fff;
+}
+.profile_buttons a:hover, .profile_buttons a:focus {
+    color: #fff;
+}
+
+.profile_buttons a.active {
+    background-color: #fc7232;
+}
+
+.profile_buttons a.inactive {
+    background-color: #FCB797;
+}
+
+.profile_buttons a.inactive:hover, .profile_buttons a.inactive:focus {
+    background-color: #fc7232;
+}
+
+.btn_profile {
+    margin:40px 0 20px 20px !important;
+}
+
+

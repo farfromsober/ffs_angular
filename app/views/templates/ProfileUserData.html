@@ -1,0 +1,25 @@
+<div class="col-md-3 profile_data">
+    <div class="div-information-detail-product">
+        <div style="width:100%; display:inline-block;">
+            <img ng-show="profileUser.avatar" ng-src="{{ ::profileUser.avatar }}"
+                 class="img-circle img-avatar-detail-product">
+            <img ng-hide="profileUser.avatar" ng-src="{{ ::avatarPlaceholderURL }}"
+                 class="img-circle img-avatar-detail-product">
+            <p class="text-small-detail-product">
+                <b>{{ ::profileUser.user.username }}</b>
+                <br />
+                {{ ::profileUser.city }}
+                <br />
+                {{ ::profileUser.sales }} ventas
+            </p>
+        </div>
+    </div>
+    <div class="profile_buttons">
+
+        <a ng-href="#/perfil/{{ ::profileUser.user.username }}/{{ ::profileUser.user.id }}/en_venta" class="btn {{ ::isActive('en_venta') }}">En venta</a>
+        <a ng-href="#/perfil/{{ ::profileUser.user.username }}/{{ ::profileUser.user.id }}/vendidos" class="btn {{ ::isActive('vendidos') }}">Vendidos</a>
+        <a ng-href="#/perfil/{{ ::profileUser.user.username }}/{{ ::profileUser.user.id }}/comprados" class="btn {{ ::isActive('comprados') }}">Comprados</a>
+
+        <a href="#" ng-show="editProfile()" class="btn inactive btn_profile">Editar perfil</a>
+    </div>
+</div>

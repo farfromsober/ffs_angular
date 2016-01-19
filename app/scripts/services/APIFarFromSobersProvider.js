@@ -58,6 +58,7 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
             cache: false
         };
         url = configService.getURLBase() + "users/" + id + "/";
+
         return $http.get(url, config).then(function (response) {
             return response;
         }, function (response) {
@@ -78,7 +79,7 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         });
     };
 
-    this.getPerfilEnVentasById = function( id ) {
+    this.getPerfilEnVentaById = function( id ) {
         var config = {
             cache: false
         };

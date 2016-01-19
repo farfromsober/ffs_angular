@@ -56,24 +56,24 @@ angular
             templateUrl: "views/PerfilVendidos.html",
             resolve: {
                 Vendidos: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
-                    return APIFarFromSobersProvider.getPerfilVendidosById($routeParams.id);
+                    return APIFarFromSobersProvider.getPerfilVendidosById($routeParams.name);
                 }],
                 Usuario: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
-                    return APIFarFromSobersProvider.getUserDataById($routeParams.name);
+                    return APIFarFromSobersProvider.getUserDataById($routeParams.id);
                 }]}
         });
 
-        $routeSegmentProvider.when( "/perfil/:name/:id/ventas", "en_ventas" );
+        $routeSegmentProvider.when( "/perfil/:name/:id/en_venta", "en_venta" );
 
-        $routeSegmentProvider.segment( "en_ventas", {
-            controller: "PerfilEnVentasController",
-            templateUrl: "views/PerfilEnVentas.html",
+        $routeSegmentProvider.segment( "en_venta", {
+            controller: "PerfilEnVentaController",
+            templateUrl: "views/PerfilEnVenta.html",
             resolve: {
+                EnVenta: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams){
+                    return APIFarFromSobersProvider.getPerfilEnVentaById($routeParams.name);
+                }],
                 Usuario: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
                     return APIFarFromSobersProvider.getUserDataById($routeParams.id);
-                }],
-                EnVenta: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams){
-                    return APIFarFromSobersProvider.getPerfilEnVentasById($routeParams.name);
                 }]
 
             }
