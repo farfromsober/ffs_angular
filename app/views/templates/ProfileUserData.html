@@ -16,9 +16,9 @@
     </div>
     <div class="profile_buttons">
 
-        <a ng-href="#/perfil/{{ ::profileUser.user.username }}/{{ ::profileUser.user.id }}/en_venta" class="btn {{ ::isActive('en_venta') }}">En venta</a>
-        <a ng-href="#/perfil/{{ ::profileUser.user.username }}/{{ ::profileUser.user.id }}/vendidos" class="btn {{ ::isActive('vendidos') }}">Vendidos</a>
-        <a ng-href="#/perfil/{{ ::profileUser.user.username }}/{{ ::profileUser.user.id }}/comprados" class="btn {{ ::isActive('comprados') }}">Comprados</a>
+        <a ng-href="#/perfil/{{ ::profileUser.user.username }}/{{ ::profileUser.id }}/en_venta" class="btn {{ ::isActive('en_venta') }}">En venta</a>
+        <a ng-href="#/perfil/{{ ::profileUser.user.username }}/{{ ::profileUser.id }}/vendidos" class="btn {{ ::isActive('vendidos') }}">Vendidos</a>
+        <a ng-href="#/perfil/{{ ::profileUser.user.username }}/{{ ::profileUser.id }}/comprados" class="btn {{ ::isActive('comprados') }}">Comprados</a>
 
         <a href="#" ng-show="editProfile()" class="btn inactive btn_profile">Editar perfil</a>
     </div>
