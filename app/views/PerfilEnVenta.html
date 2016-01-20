@@ -2,13 +2,13 @@
 <div ng-show="onSuccessMessage" class="alert alert-success">{{ successMessage }}</div>
 
 
-<profile-user-data profile-user="usuario" profile-option="'vendidos'"></profile-user-data>
+<profile-user-data profile-user="usuario" profile-option="'en_venta'"></profile-user-data>
 
 
 <table class="table-striped col-md-8 profile_table">
     <tbody>
-    <tr elemento-tabla-productos ng-repeat="producto in productos" model="producto">
-    </tr>
+        <tr elemento-tabla-productos ng-repeat="producto in productos" model="producto">
+        </tr>
     </tbody>
 </table>
 

@@ -50,30 +50,51 @@ angular
                 }] }
         });
 
-        $routeSegmentProvider.when( "/perfil/:id/vendidos", "vendidos");
+        $routeSegmentProvider.when( "/perfil/:name/:id/vendidos", "vendidos");
 
         $routeSegmentProvider.segment("vendidos", {
             controller: "PerfilVendidosController",
             templateUrl: "views/PerfilVendidos.html",
             resolve: {
                 Vendidos: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
-                    return APIFarFromSobersProvider.getPerfilVendidosById($routeParams.id);
-                }] }
+                    return APIFarFromSobersProvider.getPerfilVendidosById($routeParams.name);
+                }],
+                Usuario: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
+                    return APIFarFromSobersProvider.getUserDataById($routeParams.id);
+                }]}
         });
 
-        $routeSegmentProvider.when( "/perfil/:id/ventas", "en_ventas" );
+        $routeSegmentProvider.when( "/perfil/comprados/:id", "comprados");
 
-        $routeSegmentProvider.segment( "en_ventas", {
-            controller: "PerfilEnVentasController",
-            templateUrl: "views/PerfilEnVentas.html",
+        $routeSegmentProvider.segment("comprados", {
+            controller: "PerfilCompradosController",
+            templateUrl: "views/PerfilComprados.html",
             resolve: {
-                EnVentas: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams){
-                    return APIFarFromSobersProvider.getPerfilEnVentasById($routeParams.id);
+                Comprados: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
+                    return APIFarFromSobersProvider.getPerfilComprados();
+                }],
+                Usuario: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
+                    return APIFarFromSobersProvider.getUserDataById($routeParams.id);
+                }]}
+        });
+
+        $routeSegmentProvider.when( "/perfil/:name/:id/en_venta", "en_venta" );
+
+        $routeSegmentProvider.segment( "en_venta", {
+            controller: "PerfilEnVentaController",
+            templateUrl: "views/PerfilEnVenta.html",
+            resolve: {
+                EnVenta: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams){
+                    return APIFarFromSobersProvider.getPerfilEnVentaById($routeParams.name);
+                }],
+                Usuario: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
+                    return APIFarFromSobersProvider.getUserDataById($routeParams.id);
                 }]
+
             }
         });
 
-        $routeSegmentProvider.when( "/perfil/:id/busquedas", "busquedas" );
+        $routeSegmentProvider.when( "/perfil/:name/:id/busquedas", "busquedas" );
 
         $routeSegmentProvider.segment( "busquedas", {
             controller: "PerfilBusquedaController",

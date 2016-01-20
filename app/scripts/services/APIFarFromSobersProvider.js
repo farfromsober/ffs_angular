@@ -68,12 +68,54 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
 
     };
 
-    this.getPerfilVendidosById = function( id ) {
-        return "";
+    this.getUserDataById = function( id ) {
+        var config = {
+            cache: false
+        };
+        url = configService.getURLBase() + "users/" + id + "/";
+
+        return $http.get(url, config).then(function (response) {
+            return response;
+        }, function (response) {
+            return response;
+        });
     };
 
-    this.getPerfilEnVentasById = function( id ) {
-        return "";
+    this.getPerfilVendidosById = function( id ) {
+        var config = {
+            cache: true
+        };
+        url = configService.getURLBase() + "products/?seller=" + id;
+        url += "&selling=" + 3;
+        return $http.get(url, config).then(function (response) {
+            return response;
+        }, function (response) {
+            return response;
+        });
+    };
+
+    this.getPerfilEnVentaById = function( id ) {
+        var config = {
+            cache: false
+        };
+        url = configService.getURLBase() + "products/?seller=" + id;
+        url += "&selling=" + 2;
+        return $http.get(url, config).then(function (response) {
+            return response;
+        }, function (response) {
+            return response;
+        });
+    };
+    this.getPerfilComprados = function() {
+        var config = {
+            cache: false
+        };
+        url = configService.getURLBase() + "products-bought/";
+        return $http.get(url, config).then(function (response) {
+            return response;
+        }, function (response) {
+            return response;
+        });
     };
 
     this.getPerfilBusquedaById = function( id ) {
