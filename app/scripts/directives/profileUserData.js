@@ -1,6 +1,6 @@
 angular
     .module("farfromsober")
-    .directive("profileUserData", [function() {
+    .directive("profileUserData", ["configService", function(configService) {
 
         return {
             templateUrl: "views/templates/ProfileUserData.html",
@@ -19,10 +19,11 @@ angular
                 };
                 scope.editProfile = function (){
                     return (scope.$root.user.id == scope.profileUser.id);
-                }
+                };
                 scope.canSeeBought = function (){
                     return (scope.$root.user.id == scope.profileUser.id);
-                }
+                };
+                scope.avatarPlaceholderURL = configService.avatarPlaceholderURL;
             }
         };
     }]);
