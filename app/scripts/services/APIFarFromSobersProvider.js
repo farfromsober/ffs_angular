@@ -5,7 +5,8 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
         var config = {
             cache: false//,
         };
-        return $http.get(configService.getURLBase() + "products/", config)
+        // pedimos sólo los que están en venta
+        return $http.get(configService.getURLBase() + "products/?selling=2", config)
             .then(function (response) {
                 return response;
             }, function (response) {
@@ -19,8 +20,9 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
             cache: true
         };
 
-        //Crear la url con los parametros que nos llegan
-        var url = configService.getURLBase() + "products/?category=";
+        //Crear la url con los parametros que nos llegan, pedimos los que están en venta
+        var url = configService.getURLBase() + "products/?selling=2";
+        url += "&category=";
         if (category){
             url += category;
         }
@@ -161,6 +163,37 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
                 alert(error.message);
             });
     };
+
+
+
+    this.postTransaction = function(productId, userId, callback){
+
+        //Utilizamos la caché para obtener los datos ahorrandonos la llamada a la API
+        var config = {
+            cache: true//,
+        };
+
+        var json = {
+            "productId": productId,
+            "buyerId": userId
+        };
+
+        debugger;
+
+        return $http.post(configService.getURLBase() + "transactions/", json, config)
+            .then(function (response) {
+            //debugger;
+            console.log(response);
+            callback(response) ;
+        }, function (response) {
+            //debugger;
+            callback(response) ;
+            console.log(response);
+        });
+
+    };
+
+
 /*
     this.uploadImage = function (sasUrl, file, callback) {
         debugger;
