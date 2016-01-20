@@ -64,6 +64,20 @@ angular
                 }]}
         });
 
+        $routeSegmentProvider.when( "/perfil/comprados/:id", "comprados");
+
+        $routeSegmentProvider.segment("comprados", {
+            controller: "PerfilCompradosController",
+            templateUrl: "views/PerfilComprados.html",
+            resolve: {
+                Comprados: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
+                    return APIFarFromSobersProvider.getPerfilComprados();
+                }],
+                Usuario: ["APIFarFromSobersProvider", "$routeParams", function(APIFarFromSobersProvider,$routeParams) {
+                    return APIFarFromSobersProvider.getUserDataById($routeParams.id);
+                }]}
+        });
+
         $routeSegmentProvider.when( "/perfil/:name/:id/en_venta", "en_venta" );
 
         $routeSegmentProvider.segment( "en_venta", {

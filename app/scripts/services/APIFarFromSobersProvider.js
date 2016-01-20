@@ -104,6 +104,17 @@ angular.module("farfromsober").service("APIFarFromSobersProvider", ["$http","$fi
             return response;
         });
     };
+    this.getPerfilComprados = function() {
+        var config = {
+            cache: false
+        };
+        url = configService.getURLBase() + "products-bought/";
+        return $http.get(url, config).then(function (response) {
+            return response;
+        }, function (response) {
+            return response;
+        });
+    };
 
     this.getPerfilBusquedaById = function( id ) {
         return "";

@@ -1,0 +1,17 @@
+<div ng-show="onErrorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+<div ng-show="onSuccessMessage" class="alert alert-success">{{ successMessage }}</div>
+
+
+<profile-user-data profile-user="usuario" profile-option="'comprados'"></profile-user-data>
+
+
+<table class="table-striped col-md-8 profile_table">
+    <tbody>
+    <tr elemento-tabla-productos ng-repeat="producto in productos" model="producto">
+    </tr>
+    </tbody>
+</table>
+
+<div class="btn-circle-bg">
+    <a href="#/vender" class="btn-circle-lg btn-primary"> <span>+</span> </a>
+</div>

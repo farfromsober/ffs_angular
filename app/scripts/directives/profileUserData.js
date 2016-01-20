@@ -20,6 +20,9 @@ angular
                 scope.editProfile = function (){
                     return (scope.$root.user.id == scope.profileUser.id);
                 }
+                scope.canSeeBought = function (){
+                    return (scope.$root.user.id == scope.profileUser.id);
+                }
             }
         };
     }]);
