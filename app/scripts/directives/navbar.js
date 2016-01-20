@@ -45,6 +45,7 @@ angular
                 $location.path("/login")
             };
 
+
         }
     };
 }]);

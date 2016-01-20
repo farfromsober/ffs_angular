@@ -49,7 +49,7 @@
                                 {{ user.user.username }}<p></p> {{ user.sales }} Productos <span class="caret"></span>
                             </button>
                             <ul class="uib-dropdown-menu" role="menu" aria-labelledby="multiline-button">
-                                <li role="menuitem"><a href="#/perfil">Mi perfil</a></li>
+                                <li role="menuitem"><a href="#/perfil/{{ ::user.user.username }}/{{ ::user.id }}/en_venta">Mi perfil</a></li>
                                 <li role="menuitem"><a class="glyphicon glyphicon-log-out" ng-click="logout()"> Salir</a></li>
                             </ul>
                         </div>
