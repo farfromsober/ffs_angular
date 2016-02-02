@@ -109,8 +109,8 @@ div.fill img {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    line-height: 10px;     /* fallback */
-    max-height: 10px;      /* fallback */
+    line-height: 19px;     /* fallback */
+    max-height: 18px;      /* fallback */
     -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
 }
