@@ -1,0 +1,378 @@
+/* General */
+
+
+
+/* Navbar*/
+
+#navbar-4sale-logo {
+    padding-left: 15px;
+}
+
+.navbar-4sale {
+    background-color: #fc7232;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    line-height: 100px;
+    min-height: 100px;
+    padding-top: 0;
+}
+
+
+.ffs-text-color {
+    color: #fc7232;
+}
+
+#multiline-button {
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    vertical-align: middle;
+    height: 50px;
+    line-height: 10px;
+    white-space: normal;
+    width: 150px;
+    text-align: left;
+}
+
+#inputFindProducts
+{
+    width: 300px;
+}
+
+.navbar-form {
+    margin-bottom: 0;
+    margin-top:0;
+}
+
+.navbar a {
+    cursor: pointer;
+}
+
+.img-navbar-profile {
+    background-color: #fcdaca;
+    border-radius: 800px;
+}
+
+
+/* Body */
+
+.body, html {
+    width: 100%;
+    height: 100%;
+    padding-top: 70px;
+    background-color: #fcdaca;
+}
+
+/* ElementoTablaProductos */
+
+a.celda-producto-link {
+    text-decoration: none;
+}
+
+div.fill {
+    padding: 6px;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    width: 260px;
+    height: 300px;
+}
+
+div.fill img {
+    max-width:100%;
+    max-height: 100%;
+}
+
+#celda-producto-precio {
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    text-align: right;
+    padding-right: 10px;
+    padding-left: 0px;
+}
+
+#celda-producto-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;     /* fallback */
+    height: 32px;      /* fallback */
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+#celda-producto-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 19px;     /* fallback */
+    max-height: 18px;      /* fallback */
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+#celda-producto-category {
+    vertical-align: bottom;
+    height: 30px;
+    line-height: 40px;
+    margin-bottom: 0px;
+}
+
+
+/* Floating button Vender */
+
+.btn-circle-lg {
+    line-height: 70px;
+    width: 85px;
+    height: 85px;
+    text-align: center;
+    font-size: 70px;
+    border-radius: 50px;
+    position: fixed;
+    bottom: 27.5px;
+    right: 27.5px;
+}
+
+.btn-circle-bg {
+    background-color: white;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-size: 70px;
+    border-radius: 50px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+a.btn-circle-lg {
+    text-decoration: none;
+}
+
+.img-share{
+    float: left;
+    margin-right: 15px;
+    width: 36px;
+    height: 36px;
+}
+
+
+/* Login */
+
+.jumbotron {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background-color: #fcdaca;
+}
+
+.form-signin input[type="text"] {
+    margin-bottom: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.vertical-offset-100 {
+    padding-top: 100px;
+}
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+}
+.panel {
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+/*********************************/
+
+/***********************
+  ROUND BUTTONS
+************************/
+.round {
+    border-radius: 24px;
+}
+
+/***********************
+  CUSTOM BTN VALUES
+************************/
+
+.btn {
+    padding: 10px 50px;
+    border: 0 none;
+    letter-spacing: 1px;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+.btn-primary {
+    background: #fc7232;
+    color: #ffffff;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: rgba(255, 125, 55, 0.87);
+}
+.btn-primary:active, .btn-primary.active {
+    background: #cd6734;
+    box-shadow: none;
+}
+
+/* Detalle producto */
+
+.text-normal{
+    font-size: 14px;
+    font-family: "Open Sans";
+    color: #292525;
+}
+
+.text-small-header{
+    color: #fc7232;
+    font-size: 12px;
+    font-family: "Helvetica Neue";
+    font-weight: normal;
+    margin: 0 0 5px;
+}
+
+
+.div-left-column-detail-product {
+    padding-left: 100px;
+    padding-top: 10px;
+}
+
+.div-right-column-detail-product {
+    padding-right: 100px;
+    padding-top: 10px;
+}
+
+.div-information-detail-product {
+    padding: 20px;
+}
+
+
+.img-big-detail-product {
+    width: 100%;
+    border: 4px solid #fc7232;
+}
+
+.img-small-detail-product {
+    border: 2px solid #fc7232;
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.img-avatar-detail-product{
+    width: 40px;
+    height: 40px;
+    border: 1px solid #fcb797;
+    float: left;
+}
+
+.text-big-detail-product{
+    font-size: 24px;
+    font-family: "Open Sans";
+    color: #292525;
+}
+
+.text-small-detail-product{
+    float: left;
+    font-size: 14px;
+    font-family: "Helvetica Neue";
+    margin: 0 0 0 5px;
+    color: #292525;
+}
+
+.text-footer-information-product{
+    font-size: 14px;
+    font-family: "Open Sans";
+    color: #292525;
+    font-weight: 600;
+    margin: 0;
+}
+
+.new-product-label{
+    text-transform: uppercase;
+    color: #fc7232;
+    font-size: 12px;
+    font-family: "Helvetica Neue";
+}
+
+.new-product-from-control{
+    border-color: #fcb797;
+    font-size: 14px;
+    font-family: "Helvetica Neue";
+    background: s;
+}
+
+.profile_data {
+    float:left;
+}
+
+.profile_data .text-small-detail-product{
+    float: left;
+    font-size: 14px;
+    font-family: "Helvetica Neue";
+    margin: 0 0 0 5px;
+    color: #fc7232 !important;
+}
+
+.profile_data .img-avatar-detail-product {
+    width:80px;
+    height:80px;
+}
+
+.profile_table {
+    float:left;
+}
+
+.profile_buttons {
+    float:left;
+    margin:60px 0 0 0;
+}
+
+.profile_buttons a {
+    float:left;
+    padding:10px;
+    margin:0 0 20px 20px;
+    width:280px;
+    color:#fff;
+}
+.profile_buttons a:hover, .profile_buttons a:focus {
+    color: #fff;
+}
+
+.profile_buttons a.active {
+    background-color: #fc7232;
+}
+
+.profile_buttons a.inactive {
+    background-color: #FCB797;
+}
+
+.profile_buttons a.inactive:hover, .profile_buttons a.inactive:focus {
+    background-color: #fc7232;
+}
+
+.btn_profile {
+    margin:40px 0 20px 20px !important;
+}
+
+

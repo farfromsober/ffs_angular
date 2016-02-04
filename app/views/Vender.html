@@ -1,1 +1,66 @@
-----Vender----
+<form ng-submit="submit()" accept-charset="UTF-8" role="form" class="form-horizontal">
+    <!--<div ng-show="error" class="alert alert-danger">{{ error }}</div>-->
+
+
+    <div class="form-group">
+        <label for="product_name" class="col-sm-2 control-label new-product-label">Title</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control new-product-from-control" id="product_name" ng-model="product_name" placeholder="Product name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="product_description" class="col-sm-2 control-label new-product-label">Description</label>
+        <div class="col-sm-5">
+            <textarea class="form-control new-product-from-control" id="product_description" ng-model="product_description" placeholder="Product description" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="product_price" class="col-sm-2 control-label new-product-label">Price</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control new-product-from-control" id="product_price" ng-model="product_price" placeholder="Product price">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="product_category" class="col-sm-2 control-label new-product-label">Category</label>
+        <div class="col-sm-5 dropdown">
+            <select class="form-control new-product-from-control" id="product_category" ng-model="categoria">
+                <option value=""> </option>
+                <!--
+                <option ng-repeat="categoria in categorias" value="{{ categoria.name }}">
+                {{ categoria.name }}</option>-->
+                <option value="5" selected>Music</option>
+                <option value="4" selected>TV</option>
+                <option value="3" selected>Watch</option>
+                <option value="2">iPhone</option>
+                <option value="1">iPad</option>
+                <option value="0">Mac</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="imageSelector1" class="col-sm-2 control-label new-product-label">Image 1</label>
+        <image-selector id="imageSelector1" image-id="0" image-selected="selectImage(file, fileId)"></image-selector>
+    </div>
+    <div class="form-group">
+        <label for="imageSelector2" class="col-sm-2 control-label new-product-label">Image 2</label>
+        <image-selector id="imageSelector2" image-id="1" image-selected="selectImage(file, fileId)"></image-selector>
+    </div>
+    <div class="form-group">
+        <label for="imageSelector3" class="col-sm-2 control-label new-product-label">Image 3</label>
+        <image-selector id="imageSelector3" image-id="2" image-selected="selectImage(file, fileId)"></image-selector>
+    </div>
+    <div class="form-group">
+        <label for="imageSelector4" class="col-sm-2 control-label new-product-label">Image 4</label>
+        <image-selector id="imageSelector4" image-id="3" image-selected="selectImage(file, fileId)"></image-selector>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-success">Put on sale!</button>
+            <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+        </div>
+    </div>
+
+</form>

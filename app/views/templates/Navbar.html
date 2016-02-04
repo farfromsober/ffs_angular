@@ -1,62 +1,62 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default navbar-fixed-top navbar-4sale">
     <div class="container-fluid">
-
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <div class="navbar-header text-left col-md-3">
+            <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed" aria-expanded="true">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <a href="#/">
+                <img src="http://farfromsober.blob.core.windows.net/farfromsober-images-container/forsale_logo.png">
+            </a>
+            <a id="navbar-4sale-logo" href="#/" ng-show="showNavbarElements">
+                <img src="https://dl.dropboxusercontent.com/u/4539692/4sale-navbar.png">
+            </a>
         </div>
-
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-            <div class="nav navbar-nav navbar-center">
-                <form class="navbar-form" role="search" name="form">
-                    <a class="glyphicon glyphicon-home" href="#/productos">
-                    </a>
-                    <div class="form-group">
-                        <select class="form-control" name="selectCategoria" ng-model="categoria">
-                            <option>Todas</option>
-                            <option>Pepitooooooooo</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-
-                        <input type="text" class="form-control" placeholder="Buscar productos" name="inputFindProducts" id="inputFindProducts" ng-model="inputSearch">
-
-                        <select class="form-control" name="selectDistancia" ng-model="distancia">
-                            <option>Todas</option>
-                            <option>Pepitooooooooo</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-
+        <div class="navbar-collapse collapse" uib-collapse="isCollapsed" aria-expanded="true">
+            <form class="navbar-form" role="search" name="form">
+                <div class="navbar-form col-md-7 form-group" ng-show="showNavbarElements">
+                    <select class="form-control" name="selectCategoria" ng-model="categoria">
+                        <option value=""> </option>
+                        <option value="5" selected>Music</option>
+                        <option value="4" selected>TV</option>
+                        <option value="3" selected>Watch</option>
+                        <option value="2">iPhone</option>
+                        <option value="1">iPad</option>
+                        <option value="0">Mac</option>
+                    </select>
+                    <input type="text" class="form-control" placeholder="Buscar productos" name="inputFindProducts"
+                           id="inputFindProducts" ng-model="inputSearch">
+                    <select class="form-control" name="selectDistancia" ng-model="distancia">
+                        <option value=""> </option>
+                        <option value="100">100 km</option>
+                        <option value="50">50 km</option>
+                        <option value="10">10 km</option>
+                        <option value="5">5 km</option>
+                        <option value="1">1 km</option>
+                    </select>
                     <a class="glyphicon glyphicon-search" ng-click="findProducts()">
                     </a>
-
-                </form>
-
-            </div>
-
-            <div ng-hide="iconsLogin">
+                </div>
+            </form>
+            <div ng-show="showNavbarElements">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#/login"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="#/registro"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
+                    <li><img ng-src="{{ user.avatar }}" class="img-navbar-profile" width="40px" height="40px"></li>
+                    <li>
+                        <div class="btn-group" uib-dropdown is-open="status.isopen">
+                            <button id="multiline-button" type="button" class=" btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                                {{ user.user.username }}<p></p> {{ user.sales }} Productos <span class="caret"></span>
+                            </button>
+                            <ul class="uib-dropdown-menu" role="menu" aria-labelledby="multiline-button">
+                                <li role="menuitem"><a href="#/perfil/{{ ::user.user.username }}/{{ ::user.id }}/en_venta">Mi perfil</a></li>
+                                <li role="menuitem"><a class="glyphicon glyphicon-log-out" ng-click="logout()"> Salir</a></li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </div>
-            <div ng-show="iconsProfile">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><img ng-src="" class="img-navbar-profile" width="40px" height="40px"></li>
-                    <li class="li-navbar-profile-text"><span class="text-navbar-name">{{ userName }}</span> <span class="text-navbar-products"> {{ sales }} Productos</span></li>
-                </ul>
-            </div>
+
         </div>
     </div>
 </nav>

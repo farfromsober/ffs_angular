@@ -1,4 +1,6 @@
 
+<div ng-show="onErrorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+<div ng-show="onSuccessMessage" class="alert alert-success">{{ successMessage }}</div>
 <table class="table table-striped">
     <tbody>
     <div class="row">
@@ -8,4 +10,6 @@
     </tbody>
 </table>
 
-<a href="#/vender" class="btn btn-circle-lg btn-primary"> <span>Vender</span> </a>
+<div class="btn-circle-bg">
+    <a href="#/vender" class="btn-circle-lg btn-primary"> <span>+</span> </a>
+</div>

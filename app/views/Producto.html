@@ -1,0 +1,60 @@
+<div class="col-md-7 div-left-column-detail-product">
+
+    <img ng-show="selectedImage" ng-src="{{ selectedImage }}" class="img-big-detail-product">
+    <img ng-hide="selectedImage" ng-src="{{ ::photoPlaceholderURL }}" class="img-big-detail-product">
+
+    <br><br>
+
+    <img ng-show="producto.images[0]" ng-src="{{ ::producto.images[0] }}" class="img-small-detail-product" ng-click="changeImage(0)">
+    <img ng-hide="producto.images[0]" ng-src="{{ ::photoPlaceholderURL }}" class="img-small-detail-product">
+
+    <img ng-show="producto.images[1]" ng-src="{{ ::producto.images[1] }}" class="img-small-detail-product" ng-click="changeImage(1)">
+    <img ng-hide="producto.images[1]" ng-src="{{ ::photoPlaceholderURL }}" class="img-small-detail-product">
+
+    <img ng-show="producto.images[2]" ng-src="{{ ::producto.images[2] }}" class="img-small-detail-product" ng-click="changeImage(2)">
+    <img ng-hide="producto.images[2]" ng-src="{{ ::photoPlaceholderURL }}" class="img-small-detail-product">
+
+    <img ng-show="producto.images[3]" ng-src="{{ ::producto.images[3] }}" class="img-small-detail-product" ng-click="changeImage(3)">
+    <img ng-hide="producto.images[3]" ng-src="{{ ::photoPlaceholderURL }}" class="img-small-detail-product">
+
+
+</div>
+
+<div class="col-md-5 div-right-column-detail-product">
+
+     <div class="well well-sm div-information-detail-product">
+         <div style="width:100%; display:inline-block;">
+             <img ng-show="producto.seller.avatar" ng-src="{{ ::producto.seller.avatar }}"
+                  class="img-circle img-avatar-detail-product">
+             <img ng-hide="producto.seller.avatar" ng-src="{{ ::avatarPlaceholderURL }}"
+                  class="img-circle img-avatar-detail-product">
+             <p class="text-small-detail-product">
+                 <a ng-href="#/perfil/{{ ::producto.seller.user.username }}/{{ ::producto.seller.id }}/en_venta">{{ ::producto.seller.user.username }}</a>
+                 <br>
+                 {{ ::producto.seller.sales }} Productos vendidos
+             </p>
+             <p class="text-big-detail-product" style="float:right;">{{ ::producto.price }}€</p>
+         </div>
+         <p class="text-big-detail-product">{{ ::producto.name }}</p>
+         <p class="text-normal">{{ ::producto.description }}</p>
+         <p class="text-footer-information-product" style="float:right;">{{ ::producto.category.name }}</p>
+         <p class="text-footer-information-product">{{ ::producto.published_date|date:'dd/MM/yyyy  HH:mm'|fechaVenta }}</p>
+     </div>
+
+    <p style="text-align: center;"><button onclick="confirmBuy()" class="btn btn-primary btn-lg">Comprar!</button></p>
+
+    <p class="text-small-header">UBICACIÓN</p>
+    <img ng-src="http://www.inforural.com/ficheros/image/rutas/LasPalmas/Recreandonos%20con%20los%20Parques%20Tematicos/mapa.jpg"
+         style="width:100%">
+
+    <br><br>
+
+    <comparte-producto model="producto"></comparte-producto>
+
+
+</div>
+
+
+<div class="btn-circle-bg">
+    <a href="#/vender" class="btn-circle-lg btn-primary"> <span>+</span> </a>
+</div>
