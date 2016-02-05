@@ -21,6 +21,10 @@
     color: #fc7232;
 }
 
+.ffs-background-color {
+    background-color: #fc7232 !important;
+}
+
 #multiline-button {
     background-color: transparent;
     border-color: transparent;
