@@ -324,6 +324,7 @@ a.btn-circle-lg {
 
 .profile_data {
     float:left;
+    width: 300px;
 }
 
 .profile_data .text-small-detail-product{
@@ -352,7 +353,7 @@ a.btn-circle-lg {
     float:left;
     padding:10px;
     margin:0 0 20px 20px;
-    width:280px;
+    width:100%;
     color:#fff;
 }
 .profile_buttons a:hover, .profile_buttons a:focus {
@@ -374,5 +375,3 @@ a.btn-circle-lg {
 .btn_profile {
     margin:40px 0 20px 20px !important;
 }
-
-
